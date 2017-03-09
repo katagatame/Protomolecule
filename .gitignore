@@ -1,0 +1,7 @@
+.vscode
+/node_modules/*
+/bin/*
+config.json
+config.dev.json
+config.prod.json
+npm-debug*
