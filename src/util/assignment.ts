@@ -2,7 +2,7 @@
 
 import { Guild, GuildMember, Message, Role } from 'discord.js';
 
-export default class Util
+export default class Assignment
 {
     public static existsInArray(array: Array<any>, item: string): boolean
     {

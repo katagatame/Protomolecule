@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 
-export default class util
+export default class Nerd
 {
     public static generateRandomURL(): string[]
     {

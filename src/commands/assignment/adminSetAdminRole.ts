@@ -3,7 +3,7 @@
 import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
-import util from '../../util/assignment/util';
+import util from '../../util/assignment';
 
 export default class SetAdminRole extends Command<Bot>
 {
@@ -26,14 +26,14 @@ export default class SetAdminRole extends Command<Bot>
             return message.channel.sendMessage('Only the server owner can run this command.');
         
         // variable declaration
-        const re: RegExp = new RegExp('(?:set\\s)(.+)', 'i');
+        const re: RegExp = new RegExp('(?:.set\\s)(.+)', 'i');
         const guildStorage: any = this.bot.guildStorages.get(message.guild);        
         let roleArg: string = String();
         let adminRole: Role;
 
         // grab roleArg from original message
-        if (re.test(message.content))
-            roleArg = re.exec(message.content)[1];
+        if (re.test('.' + message.content))
+            roleArg = re.exec('.' + message.content)[1];
         
         // make sure the user specified a role
         if (roleArg)

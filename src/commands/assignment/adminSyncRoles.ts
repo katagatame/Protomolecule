@@ -2,7 +2,7 @@
 
 import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
-import util from '../../util/assignment/util';
+import util from '../../util/assignment';
 
 export default class SyncRoles extends Command<Bot>
 {
@@ -42,7 +42,7 @@ export default class SyncRoles extends Command<Bot>
             return message.channel.sendMessage('You do not permissions to run this command.');
 
         const noRoles: RichEmbed = new RichEmbed()
-            .setColor(0x274E13)
+            .setColor(0x206694)
             .setAuthor(message.guild.name + ': Role Synchronization', message.guild.iconURL)
             .addField('Current Allowed Roles', '\nNo roles currently allowed.')
             .setTimestamp();
@@ -75,7 +75,7 @@ export default class SyncRoles extends Command<Bot>
         
         // build the output embed
         const embed: RichEmbed = new RichEmbed()
-            .setColor(0x274E13)
+            .setColor(0x206694)
             .setAuthor(message.guild.name + ': Role Synchronization', message.guild.iconURL)
             .addField('Current Allowed Roles', currentRoles)
             .addField('Roles Cleaned from Allowed List', removedRoles)

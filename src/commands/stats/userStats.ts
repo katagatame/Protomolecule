@@ -33,10 +33,6 @@ export default class UserStats extends Command<Bot>
         let rolesString: string = '*none*';
         let status: string = guildMember.user.presence.status;
 
-        console.log(new Date());
-        console.log(guildMember.joinedAt);        
-        console.log(moment(new Date()).diff(guildMember.joinedAt, 'days'));
-
         // iterate through user roles
         userRoles.forEach((el: any) => {
             if (el.name !== '@everyone' && el.managed === false)
@@ -59,7 +55,7 @@ export default class UserStats extends Command<Bot>
 
         // build the embed
         const embed: RichEmbed = new RichEmbed()
-            .setColor(0x274E13)
+            .setColor(0x206694)
             .setAuthor(guildMember.user.username + '#' + guildMember.user.discriminator, guildMember.user.avatarURL)
             .setDescription(status)
             .addField('Joined Server', joinServer, true)

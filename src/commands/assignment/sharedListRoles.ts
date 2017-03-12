@@ -2,7 +2,7 @@
 
 import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
-import util from '../../util/assignment/util';
+import util from '../../util/assignment';
 
 export default class ListRoles extends Command<Bot>
 {
@@ -28,7 +28,7 @@ export default class ListRoles extends Command<Bot>
         let leftCol: string = String();
         let rightCol: string = String();
         const noRoles: RichEmbed = new RichEmbed()
-            .setColor(0x274E13)
+            .setColor(0x206694)
             .setTitle(message.guild.name + ': Role Synchronization')            
             .addField('Current Allowed Roles', '\nNo roles currently allowed.')
             .setTimestamp();
@@ -54,7 +54,7 @@ export default class ListRoles extends Command<Bot>
 
             // build the output embed
             const modEmbed: RichEmbed = new RichEmbed()
-                .setColor(0x274E13)
+                .setColor(0x206694)
                 .setAuthor(message.guild.name + ': List of Roles', message.guild.iconURL)
                 .addField('Roles', leftCol, true)
                 .addField('Status', rightCol, true)
@@ -73,7 +73,7 @@ export default class ListRoles extends Command<Bot>
             
             // build the output embed
             const userEmbed: RichEmbed = new RichEmbed()
-                .setColor(0x274E13)
+                .setColor(0x206694)
                 .setAuthor(message.guild.name + ': List of Roles', message.guild.iconURL)
                 .addField('Roles', leftCol, true)
                 .setTimestamp();
