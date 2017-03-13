@@ -3,120 +3,43 @@
         "term": "adewu",
         "pronounciation": "/æ'de.wu/",
         "partOfSpeech": "verb",
-        "definition": "to sing",
+        "definition": ["to sing"],
         "usage": "du adewu",
         "etymology": "In the late 22nd century, a wave of retro Adele mania sweeps the Belt, such that her name becomes synonymous with singing."
     }, {
         "term": "ámolof",
         "pronounciation": "/'æ.mo.lof/",
         "partOfSpeech": "Noun",
-        "definition": "love",
+        "definition": ["love"],
         "usage": "ámolof",
         "etymology": "None"
     }, {
         "term": "ámolof",
         "pronounciation": "/'æ.mo.lof/",
         "partOfSpeech": "Verb",
-        "definition": "to love",
+        "definition": ["to love"],
         "usage": "Mi du ámolof to",
         "etymology": "None"
     }, {
-        "term": "bap",
-        "pronounciation": "bap",
+        "term": "ando",
+        "pronounciation": "/'æn.do/",
+        "partOfSpeech": "Auxiliary Verb",
+        "definition": ["continuous aspect marker (e.g., ando <verb> equals “is <verb>-ing”)"],
+        "usage": "ando",
+        "etymology": "None"
+    }, {
+        "term": "ányimal",
+        "pronounciation": "/'æ.ɲi.mal/",
         "partOfSpeech": "Noun",
-        "definition": "door",
-        "usage": "bap",
-        "etymology": "Arabic باب bab \"door\""
+        "definition": ["animal"],
+        "usage": "ányimal",
+        "etymology": "English “animal”"
     }, {
-        "term": "bap kuxaku",
-        "pronounciation": "bap kuxaku",
+        "term": "anyiye",
+        "pronounciation": "/æ'ɲi.ye/",
         "partOfSpeech": "Noun",
-        "definition": "airlock",
-        "usage": "bap kuxaku",
-        "etymology": "bap “door” + kuxaku “space, vacuum”"
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "",
-        "pronounciation": "",
-        "partOfSpeech": "",
-        "definition": " ",
-        "usage": "",
-        "etymology": ""
-    }, {
-        "term": "olof",
-        "pronounciation": "/'æ.mo.lof/",
-        "partOfSpeech": "Noun",
-        "definition": "love",
-        "usage": "ámolof",
+        "definition": ["year"],
+        "usage": "anyiye",
         "etymology": "None"
     }
 ]
