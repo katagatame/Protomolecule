@@ -9,9 +9,16 @@ export default class Term
     public usage: string;
     public etymology: string;
 
-    public static isSpecificTerm(array: any, item: string): boolean
+    public static sameTerms(array: Array<any>): boolean
     {
         if (array === null) return false;
-        return Boolean(array.find(a => a.original.term === item));
+        let x = 0;
+        while (x < array.length)
+        {
+            if (array[x].original.term !== array[0].original.term)
+                return false;
+            x++;
+        }
+        return true;
     }
 };
