@@ -32,7 +32,7 @@
     "yamdbf": "github:zajrik/yamdbf#ts-port"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.17.31",
+    "@types/cheerio": "^0.22.0",
     "@types/node": "^6.0.64",
     "@types/request": "^0.0.41",
     "@types/request-promise": "^4.1.33",
