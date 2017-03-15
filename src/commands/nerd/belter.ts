@@ -60,7 +60,6 @@ export default class Dictionary extends Command<Bot>
             const re: RegExp = new RegExp('noun|verb|adjective', 'ig');
             let part: string = '';
             const filter: any = (m: Message) => {
-                
                  if (m.author.id === message.author.id && m.content.match(re))
                  {
                     part = m.content.toLowerCase();

@@ -29,7 +29,7 @@
     "moment": "^2.17.1",
     "request": "^2.80.0",
     "request-promise": "^4.1.1",
-    "yamdbf": "github:zajrik/yamdbf#ts-port"
+    "yamdbf": "^2.6.2"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.0",

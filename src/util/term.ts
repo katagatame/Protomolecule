@@ -12,6 +12,7 @@ export default class Term
     public static sameTerms(array: Array<any>): boolean
     {
         if (array === null) return false;
+        
         let x = 0;
         while (x < array.length)
         {
