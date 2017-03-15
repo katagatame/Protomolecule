@@ -4,4 +4,12 @@
 [![dependencies Status](https://david-dm.org/katagatame/Protomolecule/status.svg)](https://david-dm.org/katagatame/Protomolecule)
 [![devDependencies Status](https://david-dm.org/katagatame/Protomolecule/dev-status.svg)](https://david-dm.org/katagatame/Protomolecule?type=dev)
 
-soon:tm:
+This bot uses YAMDBF.
+
+# Links
+#### Protomolecule
+- [Protomolecule Wiki](https://github.com/katagatame/Protomolecule/wiki)
+
+#### YAMDBF
+- [YAMDBF GitHub](https://github.com/zajrik/yamdbf)
+- [YAMDBF Documentation](https://yamdbf.js.org/)
