@@ -11,8 +11,8 @@ export default class APoD extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'apod',
-            aliases: ['APOD'],
+            name: 'APoD',
+            aliases: ['apod', 'APOD'],
             description: 'NASA\'s Astronomy Picture of the Day',
             usage: '<prefix>apod, <prefix>apod r',
             extraHelp: 'A command that returns the NASA Astronomy Picture of the Day, along with explanation.',
@@ -70,7 +70,7 @@ export default class APoD extends Command<Bot>
                         if (/https\:\/\/www\.youtube\.com\/embed\/([\w-]{11})/i.test(iFrame))
                         {
                             const id: string = iFrame.match(/https\:\/\/www\.youtube\.com\/embed\/([\w-]{11})/i)[1];
-                            content = `https://youtu.be/${id}`;
+                            content = `https://www.youtube.com/embed/${id}`;
                         }
                     }
                 }
@@ -81,12 +81,16 @@ export default class APoD extends Command<Bot>
 
                 // image/video embed                
                 if (noImg && noVideo)
-                    imgEmbed.setDescription('There is no embeddable content for this date.');
-                else
+                    imgEmbed.setDescription('*There is no embedable content for this date.*');
+                
+                if (noImg && !noVideo)
+                    imgEmbed.setDescription('*There is video content for this date.*\n' + content);
+                
+                if (!noImg && noVideo)
                     imgEmbed.setImage(content);
 
                 // explanation embed
-                desc = (desc === '') ? 'There is no explanation for this content.' : desc;
+                desc = (desc === '') ? '*There is no explanation for this content.*' : desc;
                 let embed: RichEmbed = new RichEmbed()
                     .setDescription(desc)
                     .setTimestamp();
