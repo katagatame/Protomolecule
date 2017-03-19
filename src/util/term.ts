@@ -1,5 +1,7 @@
 'use strict'
 
+import { Message, RichEmbed } from 'discord.js';
+
 export default class Term
 {
     public term: string;
@@ -9,17 +11,19 @@ export default class Term
     public usage: string;
     public etymology: string;
 
-    public static sameTerms(array: Array<any>): boolean
+    public static sendTerm(message: Message, term: Term): Promise<any>
     {
-        if (array === null) return false;
-        let x = 0;
-        while (x < array.length)
-        {
-            if (array[x].original.term !== array[0].original.term)
-                return false;
-            x++;
-        }
-        return true;
+        const embed: RichEmbed = new RichEmbed()
+            .setColor(0x274E13)
+            .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
+            .addField('Term', term.term + ' *' + term.pronounciation.replace('--', '\u200b') + '*',  false)
+            .addField('Part of Speech', term.partOfSpeech, true)
+            .addField('\u200b', '\u200b', true)
+            .addField('Usage', term.usage, true)
+            .addField('Definition', term.definition.replace('\\n\\n', '\u000d'), false)
+            .addField('Etymology', term.etymology.replace('\\n\\n', '\u000d').replace('--', '*no etymology information, yet...*'), false)            
+            .setTimestamp();
+        return message.channel.sendEmbed(embed, '', { disableEveryone: true });
     }
 
     public static isSpecificResult(array: Array<any>, item: string): boolean
@@ -28,8 +32,13 @@ export default class Term
         return Boolean(array.find(a => a.original.term === item));
     }
 
-    public static getSpecificResult(array: Array<any>, item: string): any
+    public static getSpecificResults(array: Array<any>, item: string): Array<Term>
     {
-        return array.find(a => a.original.term === item);
+        let results: Array<Term> = new Array();
+        array.forEach((el: any) => {
+            if (el.original.term === item)
+                results.push(el.original);
+        });
+        return results;
     }
 };
