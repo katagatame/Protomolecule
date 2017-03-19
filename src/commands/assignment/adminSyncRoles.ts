@@ -9,7 +9,7 @@ export default class SyncRoles extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'syncRoles',
+            name: 'SyncRoles',
             aliases: ['sync', 'SYNC', 'Sync', 'sr', 's'],
             description: 'Synchronize the allowed roles with the current server roles.',
             usage: '<prefix>sync',

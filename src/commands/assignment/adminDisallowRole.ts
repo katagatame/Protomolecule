@@ -10,7 +10,7 @@ export default class DisallowRole extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'disallowRole',
+            name: 'DisallowRole',
             aliases: ['disallow', 'DISALLOW', 'Disallow', 'd'],
             description: 'Disallow specified role to be self-assigned.',
             usage: '<prefix>disallow <Role Name>',

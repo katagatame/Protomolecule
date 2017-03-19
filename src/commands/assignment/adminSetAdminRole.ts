@@ -10,7 +10,7 @@ export default class SetAdminRole extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'setAdminRole',
+            name: 'SetAdminRole',
             aliases: ['set'],
             description: 'A command to set the Admin Role.',
             usage: '<prefix>set <Role Name>',

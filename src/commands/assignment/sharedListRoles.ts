@@ -9,7 +9,7 @@ export default class ListRoles extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'listRoles',
+            name: 'ListRoles',
             aliases: ['list', 'LIST', 'List', 'l'],
             description: 'List all server roles with their current self-assignable status.',
             usage: '<prefix>list',
