@@ -9,7 +9,7 @@ export default class UserStats extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'userStats',
+            name: 'UserStats',
             aliases: ['stats', 'STATS', 'Stats', 'us'],
             description: 'Display your discord stats.',
             usage: '<prefix>stats',
