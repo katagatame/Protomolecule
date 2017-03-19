@@ -24,14 +24,14 @@ export default class APoD extends Command<Bot>
 
     public async action(message: Message, args: string[]): Promise<any>
     {
-        let uri: string = 'https://apod.nasa.gov/apod/astropix.html';
         const now: Date = new Date();
-        let dateString: string = ' -- ' + moment(now).format('ll');        
+        let uri: string = 'https://apod.nasa.gov/apod/astropix.html';
+        let dateString: string = ' -- ' + moment(now).format('ll');
 
         // get a random day from the archives
         if (args[0] === 'r')
         {
-            let randomDetails: any = util.generateRandomURL();
+            const randomDetails: Array<string> = util.generateRandomURL();
             uri = randomDetails[0];
             dateString = randomDetails[1];
         }
@@ -42,7 +42,9 @@ export default class APoD extends Command<Bot>
             transform: function (el: any) { return cheerio.load(el); }
         };
 
+        // let the user know we're working
         message.channel.startTyping();
+
         // make the request
         request(options)
             .then(function ($: any)
@@ -58,7 +60,7 @@ export default class APoD extends Command<Bot>
                     .replace(/(Explanation:)/, '');
                 let noImg: boolean = false;
                 let noVideo: boolean = true;
-                let imgEmbed: RichEmbed = new RichEmbed();
+                let mediaEmbed: RichEmbed = new RichEmbed();
 
                 // check for video content
                 if (img === undefined)
@@ -77,17 +79,19 @@ export default class APoD extends Command<Bot>
                 
                 // set the imgEmbed title
                 title = (title === '') ? 'NASA Astronomy Picture of The Day' : title;
-                imgEmbed.setTitle(title);
+                mediaEmbed.setTitle(title);
 
-                // image/video embed                
+                // no image and no video               
                 if (noImg && noVideo)
-                    imgEmbed.setDescription('*There is no embedable content for this date.*');
+                    mediaEmbed.setDescription('*There is no embedable content for this date.*');
                 
+                // no image and video
                 if (noImg && !noVideo)
-                    imgEmbed.setDescription('*There is video content for this date.*\n' + content);
+                    mediaEmbed.setDescription('*There is video content for this date.*\n' + content);
                 
+                // image and no video
                 if (!noImg && noVideo)
-                    imgEmbed.setImage(content);
+                    mediaEmbed.setImage(content);
 
                 // explanation embed
                 desc = (desc === '') ? '*There is no explanation for this content.*' : desc;
@@ -100,15 +104,20 @@ export default class APoD extends Command<Bot>
                 else
                     embed.setTitle('Explanation');
 
-                message.channel.sendMessage('', { embed: imgEmbed });
+                // output the two embeds
+                message.channel.sendMessage('', { embed: mediaEmbed });
                 message.channel.sendMessage('', { embed: embed });
+
+                // we're done working
                 return message.channel.stopTyping();
             })
             .catch(function (err: any)
             {
+                // output error message
                 message.channel.sendMessage('There was an error retrieving the title and/or the description for this content.');
+
+                // we're done working
                 return message.channel.stopTyping();
             });
-        return;
     }
 };

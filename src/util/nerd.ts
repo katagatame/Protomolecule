@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 export default class Nerd
 {
-    public static generateRandomURL(): string[]
+    public static generateRandomURL(): Array<string>
     {
         const now: Date = new Date();
         const min: number = new Date(1995, 5, 16).getTime();

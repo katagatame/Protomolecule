@@ -17,7 +17,7 @@ export default class Term
             .setColor(0x274E13)
             .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
             .addField('Term', term.term + ' *' + term.pronounciation.replace('--', '\u200b') + '*',  false)
-            .addField('Part of Speech', term.partOfSpeech, true)
+            .addField('Part of Speech', term.partOfSpeech.replace('--', '\u200b'), true)
             .addField('\u200b', '\u200b', true)
             .addField('Usage', term.usage, true)
             .addField('Definition', term.definition.replace('\\n\\n', '\u000d'), false)
