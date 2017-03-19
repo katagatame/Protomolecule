@@ -15,6 +15,9 @@ gulp.task('default', () =>
     gulp.src('./src/config.json')
         .pipe(gulp.dest('bin/'));
     
+    gulp.src('./src/client_secret.json')
+        .pipe(gulp.dest('bin/'));
+    
     gulp.src('./src/data/*.*')
         .pipe(gulp.dest('bin/data/'));
 

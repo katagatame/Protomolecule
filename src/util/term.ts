@@ -12,7 +12,6 @@ export default class Term
     public static sameTerms(array: Array<any>): boolean
     {
         if (array === null) return false;
-        
         let x = 0;
         while (x < array.length)
         {
@@ -21,5 +20,16 @@ export default class Term
             x++;
         }
         return true;
+    }
+
+    public static isSpecificResult(array: Array<any>, item: string): boolean
+    {
+        if (array === null) return false;
+        return Boolean(array.find(a => a.original.term === item));
+    }
+
+    public static getSpecificResult(array: Array<any>, item: string): any
+    {
+        return array.find(a => a.original.term === item);
     }
 };
