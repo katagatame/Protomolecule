@@ -2,7 +2,7 @@
 
 import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
-import util from '../../util/assignment';
+import Assignment from '../../util/assignment';
 
 export default class ListRoles extends Command<Bot>
 {
@@ -45,7 +45,7 @@ export default class ListRoles extends Command<Bot>
                 if (el.position < adminCommandRole.position && el.name !== '@everyone' && el.managed === false)
                 {
                     leftCol += '\n' + el.name;
-                    if (util.existsInArray(availableRoles, el.name))
+                    if (Assignment.existsInArray(availableRoles, el.name))
                         rightCol += '\n**Allowed**';
                     else
                         rightCol += '\nNot Allowed';

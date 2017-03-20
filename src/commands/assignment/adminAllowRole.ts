@@ -3,7 +3,7 @@
 import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
-import util from '../../util/assignment';
+import Assignment from '../../util/assignment';
 
 export default class AllowRole extends Command<Bot>
 {
@@ -68,28 +68,28 @@ export default class AllowRole extends Command<Bot>
             role = results[0].original[1];
 
             // check if role already is allowed
-            if (util.doesRoleExist(availableRoles, role))
+            if (Assignment.doesRoleExist(availableRoles, role))
                 return message.channel.sendMessage(`\`${role.name}\` is already an allowed role.`);
 
             // update roles
-            util.updateRoles(availableRoles, guildStorage, message, role);
+            Assignment.updateRoles(availableRoles, guildStorage, message, role);
         }
 
         // more than one role found
         if (results.length > 1)
         {
             // check if roleArg is specifically typed
-            if (util.isSpecificResult(results, roleArg))
+            if (Assignment.isSpecificResult(results, roleArg))
             {
                 // role from roleArg
-                role = util.getSpecificRole(results, roleArg);
+                role = Assignment.getSpecificRole(results, roleArg);
 
                 // check if role already is allowed
-                if (util.doesRoleExist(availableRoles, role))
+                if (Assignment.doesRoleExist(availableRoles, role))
                     return message.channel.sendMessage(`\`${role.name}\` is already an allowed role.`);
                 
                 // update roles
-                util.updateRoles(availableRoles, guildStorage, message, role);
+                Assignment.updateRoles(availableRoles, guildStorage, message, role);
             }
             else
                 // be more specific

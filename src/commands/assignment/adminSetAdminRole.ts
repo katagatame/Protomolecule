@@ -3,7 +3,7 @@
 import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
-import util from '../../util/assignment';
+import Assignment from '../../util/assignment';
 
 export default class SetAdminRole extends Command<Bot>
 {
@@ -59,9 +59,9 @@ export default class SetAdminRole extends Command<Bot>
             if (results.length > 1)
             {
                 // check if roleArg is specifically typed
-                if (util.isSpecificResult(results, roleArg))
+                if (Assignment.isSpecificResult(results, roleArg))
                 {
-                    guildStorage.setItem('Admin Role', util.getSpecificRole(results, roleArg).id);
+                    guildStorage.setItem('Admin Role', Assignment.getSpecificRole(results, roleArg).id);
                     return message.channel.sendMessage(`Admin Role successfully set to: \`${adminRole.name}\``);
                 }
                 else

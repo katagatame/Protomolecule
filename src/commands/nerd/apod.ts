@@ -4,7 +4,7 @@ import { Message, User, RichEmbed } from 'discord.js';
 import * as request from 'request-promise';
 import * as cheerio from 'cheerio';
 import * as moment from 'moment';
-import util from '../../util/nerd';
+import Nerd from '../../util/nerd';
 
 export default class APoD extends Command<Bot>
 {
@@ -31,7 +31,7 @@ export default class APoD extends Command<Bot>
         // get a random day from the archives
         if (args[0] === 'r')
         {
-            const randomDetails: Array<string> = util.generateRandomURL();
+            const randomDetails: Array<string> = Nerd.generateRandomURL();
             uri = randomDetails[0];
             dateString = randomDetails[1];
         }

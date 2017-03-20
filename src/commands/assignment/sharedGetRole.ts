@@ -3,7 +3,7 @@
 import { Bot, Command } from 'yamdbf';
 import { GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
-import util from '../../util/assignment';
+import Assignment from '../../util/assignment';
 
 export default class GetRole extends Command<Bot>
 {
@@ -71,10 +71,10 @@ export default class GetRole extends Command<Bot>
             if (results.length > 1)
             {
                 // check if roleArg is specifically typed
-                if (util.isSpecificResult(results, roleArgs[0]))
+                if (Assignment.isSpecificResult(results, roleArgs[0]))
                 {
                     // grab the role to be assigned
-                    role = message.guild.roles.find('name', util.getSpecificRoleName(results, roleArgs[0]));
+                    role = message.guild.roles.find('name', Assignment.getSpecificRoleName(results, roleArgs[0]));
 
                     // try to find user
                     message.guild.fetchMember(message.author.id).then((user: GuildMember) => {
@@ -121,10 +121,10 @@ export default class GetRole extends Command<Bot>
                 if (results.length > 1)
                 {
                     // check if roleArg is specifically typed
-                    if (util.isSpecificResult(results, el))
+                    if (Assignment.isSpecificResult(results, el))
                     {
                         // grab the role to be assigned
-                        role = message.guild.roles.find('name', util.getSpecificRoleName(results, el));
+                        role = message.guild.roles.find('name', Assignment.getSpecificRoleName(results, el));
 
                         // try to find user
                         message.guild.fetchMember(message.author.id).then((user: GuildMember) => {

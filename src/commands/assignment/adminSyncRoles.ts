@@ -2,7 +2,6 @@
 
 import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
-import util from '../../util/assignment';
 
 export default class SyncRoles extends Command<Bot>
 {
@@ -10,7 +9,7 @@ export default class SyncRoles extends Command<Bot>
     {
         super(bot, {
             name: 'SyncRoles',
-            aliases: ['sync', 'SYNC', 'Sync', 'sr', 's'],
+            aliases: ['sync'],
             description: 'Synchronize the allowed roles with the current server roles.',
             usage: '<prefix>sync',
             extraHelp: 'This command will remove any non-existent server roles from the list of allowed roles.',

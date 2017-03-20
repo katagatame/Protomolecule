@@ -3,7 +3,7 @@
 import { Bot, Command } from 'yamdbf';
 import { GuildMember, Message, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
-import util from '../../util/assignment';
+import Assignment from '../../util/assignment';
 
 export default class DisallowRole extends Command<Bot>
 {
@@ -70,12 +70,12 @@ export default class DisallowRole extends Command<Bot>
             role = message.guild.roles.get(results[0].original.id);
             
             // remove the role from the allowed list
-            availableRoles.splice(util.getRoleToRemove(availableRoles, role.name), 1);
+            availableRoles.splice(Assignment.getRoleToRemove(availableRoles, role.name), 1);
             guildStorage.setItem('Server Roles', availableRoles);
 
             // check if scrub option was used
             if (scrub)
-                util.removeRoleFromUserBase(message, role);
+                Assignment.removeRoleFromUserBase(message, role);
             else
                 // display success message
                 return message.channel.sendMessage(`\`${role.name}\` successfully disallowed.`);
@@ -85,15 +85,15 @@ export default class DisallowRole extends Command<Bot>
         if (results.length > 1)
         {
             // check if roleArg is specifically typed
-            if (util.isSpecificResult(results, roleArg))
+            if (Assignment.isSpecificResult(results, roleArg))
             {
                 // remove the role from the allowed list
-                availableRoles.splice(util.getRoleToRemove(availableRoles, util.getSpecificRoleName(results, roleArg)), 1);
+                availableRoles.splice(Assignment.getRoleToRemove(availableRoles, Assignment.getSpecificRoleName(results, roleArg)), 1);
                 guildStorage.setItem('Server Roles', availableRoles);
 
                 // check if scrub option was used
                 if (scrub)
-                    util.removeRoleFromUserBase(message, role);
+                    Assignment.removeRoleFromUserBase(message, role);
                 else
                     // display success message
                     return message.channel.sendMessage(`\`${role.name}\` successfully disallowed.`);

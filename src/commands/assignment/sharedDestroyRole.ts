@@ -3,7 +3,7 @@
 import { Bot, Command } from 'yamdbf';
 import { GuildMember, Message, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
-import util from '../../util/assignment';
+import Assignment from '../../util/assignment';
 
 export default class DestroyRole extends Command<Bot>
 {
@@ -62,10 +62,10 @@ export default class DestroyRole extends Command<Bot>
         if (results.length > 1)
         {
             // check if roleArg is specifically typed
-            if (util.isSpecificResult(results, roleArg))
+            if (Assignment.isSpecificResult(results, roleArg))
             {
                 // grab the role to remove
-                role = message.guild.roles.find('name', util.getSpecificRoleName(results, roleArg));
+                role = message.guild.roles.find('name', Assignment.getSpecificRoleName(results, roleArg));
                 
                 // try to find user
                 message.guild.fetchMember(message.author.id).then((user: GuildMember) => {
