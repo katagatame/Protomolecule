@@ -3,6 +3,7 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
 import * as googleAuth from 'google-auth-library';
+import Constants from '../util/constants';
 
 export default class Google
 {
