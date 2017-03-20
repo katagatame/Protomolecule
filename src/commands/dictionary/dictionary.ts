@@ -17,23 +17,28 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
             aliases: ['dd'],
             description: 'A small dictionary of Belta terms.',
             usage: '<prefix>d',
-            group: 'nerd',
+            group: 'dictionary',
             guildOnly: true
         });
     }
 
     public async action(message: Message, args: string[]): Promise<any>
     {
+        // variable declaration
         let g: Google = new Google();
         let belter: Array<Term> = new Array();
 
+        // read in google info
         fs.readFile('client_secret.json', function processClientSecrets(err: NodeJS.ErrnoException, content: Buffer)
         {
+            // error checking
             if (err)
                 return console.log('Error loading client secret file: ' + err);
             
+            // authorize and access content
             g.authorize(JSON.parse(content.toString()), function(auth: any)
             {
+                // grab the Belter Creole GoogleSheet
                 let sheets: any = gapi.sheets('v4');
                 sheets.spreadsheets.values.get(
                 {
@@ -43,15 +48,21 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                 },
                 function(err: any, response: any)
                 {
-                    if (err) {
-                        console.log('The API returned an error: ' + err);
-                        return;
-                    }
+                    // error checking
+                    if (err)
+                        return console.log('The API returned an error: ' + err);
+                    
+                    // grab the data
                     var rows: any = response.values;
+
+                    // make sure there is data
                     if (rows.length == 0)
                         console.log('No data found.');
+                    
+                    // there is data
                     else
                     {
+                        // build the term array
                         for (var i: number = 0; i < rows.length; i++)
                         {
                             let row: any = rows[i];
@@ -67,9 +78,6 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                             belter.push(t);
                         }
 
-                        // serach for term
-                        let options: any = { extract: (el: any) => { return el.term; } };
-                        let results: Array<any> = fuzzy.filter(args.join(' '), belter, options);
 
                     }
                 });

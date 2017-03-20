@@ -5,6 +5,7 @@ import { GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
 import * as fs from 'fs';
 import * as fuzzy from 'fuzzy';
 import * as gapi from 'googleapis';
+import Constants from '../../util/constants'
 import Google from '../../util/google';
 import Term from '../../util/term';
 
@@ -17,7 +18,7 @@ export default class BelterWordSearch extends Command<Bot>
             aliases: ['bt'],
             description: 'A small dictionary of Belta terms.',
             usage: '<prefix>bt <Belta Term>',
-            group: 'nerd',
+            group: 'dictionary',
             guildOnly: true
         });
     }
@@ -31,6 +32,7 @@ export default class BelterWordSearch extends Command<Bot>
         // read in google info
         fs.readFile('client_secret.json', function processClientSecrets(err: NodeJS.ErrnoException, content: Buffer)
         {
+            // error checking
             if (err)
                 return console.log('Error loading client secret file: ' + err);
             
@@ -42,7 +44,7 @@ export default class BelterWordSearch extends Command<Bot>
                 sheets.spreadsheets.values.get(
                 {
                     auth: auth,
-                    spreadsheetId: '1RCnWC3lQLmyo6P1IbLFB0n4x07d-oB5VqKxjv0R-EzY',
+                    spreadsheetId: Constants.beltaSpreadSheetID,
                     range: 'Terms!A2:F',
                 },
                 function(err: any, response: any)
@@ -106,31 +108,7 @@ export default class BelterWordSearch extends Command<Bot>
                                     return Term.sendTerm(message, termResults[0]);
                                 
                                 // define parts of speech
-                                const partsOfSpeech: Array<string> = [
-                                    'Adjective',
-                                    'Adverb',
-                                    'Article',
-                                    'Auxiliary Verb',
-                                    'Bound Morpheme',
-                                    'Conjunction',
-                                    'Determiner',
-                                    'Interjection',
-                                    'Noun',
-                                    'Noun Phrase',
-                                    'Number',
-                                    'Particle',
-                                    'Phrase',
-                                    'Prefix',
-                                    'Preposition',
-                                    'Pronoun',
-                                    'Proper Noun',
-                                    'Quantifier',
-                                    'Suffix',
-                                    'Tag Question',
-                                    'Verb',
-                                    'Verb Phrase',
-                                ];
-                                const re: RegExp = new RegExp(partsOfSpeech.join('|'), 'ig');
+                                const re: RegExp = new RegExp(Constants.partsOfSpeech.join('|'), 'ig');
                                 let part: string = '';
 
                                 // create confirmation filter
