@@ -5,7 +5,7 @@ import { Message, RichEmbed } from 'discord.js';
 export default class Term
 {
     public term: string;
-    public pronounciation: string;
+    public pronunciation: string;
     public partOfSpeech: string;
     public definition: string;
     public usage: string;
@@ -16,7 +16,7 @@ export default class Term
         const embed: RichEmbed = new RichEmbed()
             .setColor(0x274E13)
             .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
-            .addField('Term', term.term + ' *' + term.pronounciation.replace('--', '\u200b') + '*',  false)
+            .addField('Term', term.term + ' *' + term.pronunciation.replace('--', '\u200b') + '*',  false)
             .addField('Part of Speech', term.partOfSpeech.replace('--', '\u200b'), true)
             .addField('\u200b', '\u200b', true)
             .addField('Usage', term.usage, true)

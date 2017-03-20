@@ -70,7 +70,7 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
 
                             t.term = row[0];
                             t.definition = row[1];
-                            t.pronounciation = row[2];
+                            t.pronunciation = row[2];
                             t.usage = row[3];
                             t.partOfSpeech = row[4];
                             t.etymology = row[5];
