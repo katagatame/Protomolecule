@@ -79,7 +79,7 @@ export default class APoD extends Command<Bot>
                 
                 // set the imgEmbed title
                 title = (title === '') ? 'NASA Astronomy Picture of The Day' : title;
-                mediaEmbed.setTitle(title);
+                mediaEmbed.setAuthor(title);
 
                 // no image and no video               
                 if (noImg && noVideo)
@@ -96,13 +96,14 @@ export default class APoD extends Command<Bot>
                 // explanation embed
                 desc = (desc === '') ? '*There is no explanation for this content.*' : desc;
                 let embed: RichEmbed = new RichEmbed()
+                    .setColor(0x206694)
                     .setDescription(desc)
                     .setTimestamp();
                 
                 if (args[0] === 'r')
-                    embed.setTitle('Explanation' + dateString);
+                    embed.setAuthor('Explanation' + dateString);
                 else
-                    embed.setTitle('Explanation');
+                    embed.setAuthor('Explanation');
 
                 // output the two embeds
                 message.channel.sendMessage('', { embed: mediaEmbed });
