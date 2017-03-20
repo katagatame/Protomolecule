@@ -9,10 +9,11 @@ export default class ListRoles extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'ListRoles',
-            aliases: ['list', 'LIST', 'List', 'l'],
-            description: 'List all server roles with their current self-assignable status.',
+            name: 'list',
+            aliases: ['LIST', 'List', 'l'],
+            description: 'List Roles',
             usage: '<prefix>list',
+            extraHelp: 'Use this command to display a list of roles.',
             group: 'assignment',
             guildOnly: true
         });
@@ -24,7 +25,7 @@ export default class ListRoles extends Command<Bot>
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         const availableRoles: Array<any> = guildStorage.getItem('Server Roles');
         const serverRoles: Collection<string, Role> = new Collection(Array.from(message.guild.roles.entries()).sort((a: any, b: any) => b[1].position - a[1].position));
-        let adminCommandRole: Role;
+        let adminCommandRole: Role = message.guild.roles.find('name', 'The Rocinante');
         let leftCol: string = String();
         let rightCol: string = String();
         const noRoles: RichEmbed = new RichEmbed()
@@ -32,10 +33,6 @@ export default class ListRoles extends Command<Bot>
             .setTitle(message.guild.name + ': Role Synchronization')            
             .addField('Current Allowed Roles', '\nNo roles currently allowed.')
             .setTimestamp();
-  
-        // find admin command role
-        if (guildStorage.getItem('Admin Role'))
-            adminCommandRole = message.guild.roles.get(guildStorage.getItem('Admin Role').toString());
 
         if (adminCommandRole !== undefined && message.member.roles.find('name', adminCommandRole.name))
         {

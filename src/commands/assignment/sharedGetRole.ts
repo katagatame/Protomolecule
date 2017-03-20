@@ -10,10 +10,11 @@ export default class GetRole extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'GetRole',
-            aliases: ['gr', 'GR', 'gR', 'Gr'],
-            description: 'Get one of the specified self-assignable roles.',
+            name: 'gr',
+            aliases: ['GR', 'gR', 'Gr'],
+            description: 'Get Role',
             usage: '<prefix>gr <Role Name>',
+            extraHelp: 'Use this command to obtain a specific role.',
             group: 'assignment',
             guildOnly: true
         });

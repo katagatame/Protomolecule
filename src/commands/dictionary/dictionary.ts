@@ -13,10 +13,10 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'DisekowtelowdaDictionary',
-            aliases: ['dd'],
-            description: 'A small dictionary of Belta terms.',
+            name: 'dd',
+            description: 'Disekowtelowda Dictionary',
             usage: '<prefix>dd',
+            extraHelp: 'Use this command to interact with the Disekowtelowda Dictionary, as a whole.',
             group: 'dictionary',
             guildOnly: true
         });

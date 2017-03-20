@@ -12,10 +12,10 @@ export default class BelterWordSearch extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'BelterWordSearch',
-            aliases: ['bt'],
-            description: 'A small dictionary of Belta terms.',
+            name: 'bt',
+            description: 'Belta Word Search',
             usage: '<prefix>bt <Belta Term>',
+            extraHelp: 'Use this command to look up a Belta term within the Disekowtelowda Dictionary.',
             group: 'dictionary',
             guildOnly: true
         });

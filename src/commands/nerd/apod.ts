@@ -11,14 +11,13 @@ export default class APoD extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'APoD',
-            aliases: ['apod', 'APOD'],
+            name: 'apod',
+            aliases: ['APOD'],
             description: 'NASA\'s Astronomy Picture of the Day',
             usage: '<prefix>apod, <prefix>apod r',
             extraHelp: 'A command that returns the NASA Astronomy Picture of the Day, along with explanation.',
             group: 'nerd',
-            guildOnly: true,
-            ownerOnly: false
+            guildOnly: true
         });
     }
 

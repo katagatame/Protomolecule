@@ -1,8 +1,8 @@
 'use strict';
 
 export type BotConstants = {
-    avasaralaImage: string,
-    avasaralaQuotes: Array<string>, // quotes supplied by /u/it-reaches-out
+    avasaralaImage: Array<string>,          // images supplied by /u/it-reaches-out
+    avasaralaQuotes: Array<string>,         // quotes supplied by /u/it-reaches-out
     beltaSpreadSheetID: string,
     charcaterList: Array<[string, string]>,
     partsOfSpeech: Array<string>
@@ -10,7 +10,18 @@ export type BotConstants = {
 
 const Constants: BotConstants = <any> {};
 
-Constants.avasaralaImage = 'http://i.imgur.com/is0iM0b.jpg';
+Constants.avasaralaImage = [
+    'http://i.imgur.com/gLAavTM.png',
+    'http://i.imgur.com/BLW3xwc.png',
+    'http://i.imgur.com/9naUBis.png',
+    'http://i.imgur.com/XaNMSo1.png',
+    'http://i.imgur.com/i8oaYj9.png',
+    'http://i.imgur.com/gF4kme3.png',
+    'http://i.imgur.com/FrZHD72.png',
+    'http://i.imgur.com/l9B8QNj.png',
+    'http://i.imgur.com/a3HUir3.png',
+    'http://i.imgur.com/270wrQm.png'
+];
 Constants.avasaralaQuotes = [
     'Realizing you\'ve got shit on your fingers is the first step to washing your hands.',
     'No one likes a smart-ass.',

@@ -10,11 +10,13 @@ export default class DisallowRole extends Command<Bot>
     public constructor(bot: Bot)
     {
         super(bot, {
-            name: 'DisallowRole',
-            aliases: ['disallow', 'DISALLOW', 'Disallow', 'd'],
-            description: 'Disallow specified role to be self-assigned.',
+            name: 'disallow',
+            aliases: ['DISALLOW', 'Disallow', 'd'],
+            description: 'Disallow Role',
             usage: '<prefix>disallow <Role Name>',
+            extraHelp: 'Use this command to disallow roles to be self-assignable.',
             group: 'assignment',
+            roles: ['The Rocinante'],
             guildOnly: true
         });
     }
@@ -26,21 +28,10 @@ export default class DisallowRole extends Command<Bot>
         const reS: RegExp = new RegExp('(?:-s)', 'i');
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');        
-        let scrub: Boolean = false;
-        let roleArg: string = String();
-        let adminCommandRole: Role;
+        let adminCommandRole: Role = message.guild.roles.find('name', 'The Rocinante');
+        let roleArg: string = '';
         let role: Role;
-
-        // make sure server owner has set an Admin Role
-        if (!guildStorage.getItem('Admin Role'))
-            return message.channel.sendMessage('Please assign an Admin Role with `.set <Role Name>`.');
-
-        // find admin command role
-        adminCommandRole = message.guild.roles.get(guildStorage.getItem('Admin Role').toString());
-
-        // make sure user has the admin command role
-        if (!message.member.roles.find('name', adminCommandRole.name))
-            return message.channel.sendMessage('You do not permissions to run this command.');
+        let scrub: Boolean = false;
 
         // make sure a role was specified
         if (re.test('.' + message.content))
@@ -75,6 +66,7 @@ export default class DisallowRole extends Command<Bot>
 
             // check if scrub option was used
             if (scrub)
+                // remove role from all users
                 Assignment.removeRoleFromUserBase(message, role);
             else
                 // display success message
