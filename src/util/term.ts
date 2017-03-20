@@ -1,6 +1,7 @@
 'use strict'
 
 import { Message, RichEmbed } from 'discord.js';
+import Constants from '../util/constants';
 
 export default class Term
 {
@@ -40,5 +41,15 @@ export default class Term
                 results.push(el.original);
         });
         return results;
+    }
+
+    public static getCharacterList(): Array<string>
+    {
+        return Constants.charcaterList.map((el: any) => { return el[0]; });
+    }
+
+    public static getShortcutList(): Array<string>
+    {
+        return Constants.charcaterList.map((el: any) => { return el[1]; });
     }
 };

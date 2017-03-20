@@ -16,7 +16,7 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
             name: 'DisekowtelowdaDictionary',
             aliases: ['dd'],
             description: 'A small dictionary of Belta terms.',
-            usage: '<prefix>d',
+            usage: '<prefix>dd',
             group: 'dictionary',
             guildOnly: true
         });
@@ -25,63 +25,36 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
     public async action(message: Message, args: string[]): Promise<any>
     {
         // variable declaration
-        let g: Google = new Google();
-        let belter: Array<Term> = new Array();
+        const re: RegExp = new RegExp('(?:.dd\\s)(.+)', 'i');
+        let query: string = '';
 
-        // read in google info
-        fs.readFile('client_secret.json', function processClientSecrets(err: NodeJS.ErrnoException, content: Buffer)
+        // make sure a role was specified
+        if (re.test('.' + message.content))
+            query = re.exec('.' + message.content)[1];
+        else
+            return message.channel.sendMessage('Please specify a command.');
+        
+        // evaluate the query
+        switch (query)
         {
-            // error checking
-            if (err)
-                return console.log('Error loading client secret file: ' + err);
-            
-            // authorize and access content
-            g.authorize(JSON.parse(content.toString()), function(auth: any)
-            {
-                // grab the Belter Creole GoogleSheet
-                let sheets: any = gapi.sheets('v4');
-                sheets.spreadsheets.values.get(
-                {
-                    auth: auth,
-                    spreadsheetId: '1RCnWC3lQLmyo6P1IbLFB0n4x07d-oB5VqKxjv0R-EzY',
-                    range: 'Terms!A2:F',
-                },
-                function(err: any, response: any)
-                {
-                    // error checking
-                    if (err)
-                        return console.log('The API returned an error: ' + err);
-                    
-                    // grab the data
-                    var rows: any = response.values;
-
-                    // make sure there is data
-                    if (rows.length == 0)
-                        console.log('No data found.');
-                    
-                    // there is data
-                    else
-                    {
-                        // build the term array
-                        for (var i: number = 0; i < rows.length; i++)
-                        {
-                            let row: any = rows[i];
-                            let t: Term = new Term();
-
-                            t.term = row[0];
-                            t.definition = row[1];
-                            t.pronunciation = row[2];
-                            t.usage = row[3];
-                            t.partOfSpeech = row[4];
-                            t.etymology = row[5];
-
-                            belter.push(t);
-                        }
-
-
-                    }
-                });
-            });
-        });
+            case 'clist':
+            case 'chars':
+            case 'characters':
+            case 'shortcuts':
+            case 'slist':
+                const cList: Array<string> = Term.getCharacterList();
+                const sList: Array<string> = Term.getShortcutList();
+                const embed: RichEmbed = new RichEmbed()
+                    .setColor(0x274E13)
+                    .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
+                    .addField('Character', '`' + cList.join('\`\n\`') + '`', true)
+                    .addField('Keyboard Shortcut', '`' + sList.join('\`\n\`') + '`', true)
+                    .addField('Instructions', 'To use these shortcuts do the following:\n\npress and hold `Alt`, then press a number combination.', false)
+                    .setTimestamp();
+                
+                return message.channel.sendEmbed(embed, '', { disableEveryone: true });
+            default:
+                break;
+        }
     }
 };
