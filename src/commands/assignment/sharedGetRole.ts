@@ -27,7 +27,7 @@ export default class GetRole extends Command<Bot>
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');
         let roleArgs: Array<any> = new Array();;
-        let role: Role = new Role();
+        let role: Role;
 
         // make sure there are allowed roles
         if (availableRoles === null)

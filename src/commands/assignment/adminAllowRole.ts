@@ -30,7 +30,7 @@ export default class AllowRole extends Command<Bot>
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');
         let adminCommandRole: Role = message.guild.roles.find('name', 'The Rocinante');
         let roleArg: string = '';
-        let role: Role = new Role();        
+        let role: Role;
 
         // make sure a role was specified
         if (Constants.allowRegExp.test(message.content))

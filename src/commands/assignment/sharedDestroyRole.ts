@@ -27,7 +27,7 @@ export default class DestroyRole extends Command<Bot>
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');
         let roleArg: string = '';
-        let role: Role = new Role();
+        let role: Role;
 
         // make sure a role was specified
         if (Constants.destroyRegExp.test(message.content))

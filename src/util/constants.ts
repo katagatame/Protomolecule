@@ -7,7 +7,6 @@ export type BotConstants = {
     scrubRegExp: RegExp,
     destroyRegExp: RegExp,
     getRegExp: RegExp,
-    ddRegExp: RegExp,
 
     // avasarala, images and quotes supplied by /u/it-reaches-out
     avasaralaImages: Array<string>,
@@ -21,12 +20,11 @@ export type BotConstants = {
 
 const Constants: BotConstants = <any> {};
 
-Constants.allowRegExp = new RegExp('^(?:allow\\s|a\\s)(.+)', 'i');
-Constants.disallowRegExp = new RegExp('^(?:disallow\\s|d\\s)(.+[^\\s-s])', 'i');
+Constants.allowRegExp = new RegExp('^(?:.allow\\s|.a\\s)(.+)', 'i');
+Constants.disallowRegExp = new RegExp('^(?:.disallow\\s|.d\\s)(.+[^\\s-s])', 'i');
 Constants.scrubRegExp = new RegExp('(?:-s)', 'i');
-Constants.destroyRegExp = new RegExp('^(?:dr\\s)(.+)', 'i');
-Constants.getRegExp = new RegExp('[^,gr\\s][^\\,]*[^,\\s]*', 'ig');
-Constants.ddRegExp = new RegExp('^(?:dd\\s)(.+)', 'i');
+Constants.destroyRegExp = new RegExp('^(?:.dr\\s)(.+)', 'i');
+Constants.getRegExp = new RegExp('[^,.gr\\s][^\\,]*[^,\\s]*', 'ig');
 
 Constants.avasaralaImages = [
     'http://i.imgur.com/gLAavTM.png',

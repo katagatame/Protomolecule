@@ -26,14 +26,8 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
         const terms: Array<Term> = guildStorage.getItem('BeltaTerms');
         let query: string = '';
 
-        // make sure a role was specified
-        if (Constants.ddRegExp.test(message.content))
-            query = Constants.ddRegExp.exec(message.content)[1];
-        else
-            return message.channel.sendMessage('Please specify a command.');
-        
         // evaluate the query
-        switch (query)
+        switch (args.join(' '))
         {
             case 'clist':
             case 'chars':
@@ -63,7 +57,7 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                 else
                     return message.channel.sendMessage('Terms have not been updated!  Check error logs.');
             default:
-                break;
+                return message.channel.sendMessage('Please specify a command.');
         }
     }
 };
