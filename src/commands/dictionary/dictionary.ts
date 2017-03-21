@@ -41,7 +41,7 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                     .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
                     .addField('Character', '`' + cList.join('\`\n\`') + '`', true)
                     .addField('Keyboard Shortcut', '`' + sList.join('\`\n\`') + '`', true)
-                    .addField('Instructions', 'To use these shortcuts do the following:\n\npress and hold `Alt`, then press a number combination.', false)
+                    .addField('Instructions', 'Press and hold `Alt`, then press a number combination.', false)
                     .setTimestamp();
                 
                 // display the embed

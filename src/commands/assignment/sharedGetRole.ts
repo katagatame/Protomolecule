@@ -32,19 +32,21 @@ export default class GetRole extends Command<Bot>
         // make sure there are allowed roles
         if (availableRoles === null)
             return message.channel.sendMessage('There are currently no self-assignable roles.');
+
+        // make sure a role was specified
+        if (args.length === 0)
+            return message.channel.sendMessage('Please specify a role to assign.');
         
-        if (Constants.getRegExp.test(message.content))
-            roleArgs = (message.content).match(Constants.getRegExp);
-        else
-            return message.channel.sendMessage('Please specify a role to self-assign.');
-        
+        // create array from user input
+        roleArgs = args.map((el: any) => { return el.replace(',', ''); });
+
+        // if one role specified
         if (roleArgs.length === 1)
         {
+            // if role specified was wildcard
             if (roleArgs[0] === '*.')
             {
-                availableRoles.forEach((el: any) => {
-                    message.member.addRole(el.id);
-                });
+                availableRoles.forEach((el: any) => { message.member.addRole(el.id); });
                 return message.channel.sendMessage(`\`${availableRoles.map((el: any) => {return el.name}).join('`, `')}\` successfully assigned.`);
             }
 
@@ -91,8 +93,10 @@ export default class GetRole extends Command<Bot>
             }
         }
 
+        // if more than one role specified
         if (roleArgs.length > 1)
         {
+            // variable declaration
             let invalidRoles: string = '';
             let validRoles: string = '';
             const embed: RichEmbed = new RichEmbed();
@@ -141,11 +145,13 @@ export default class GetRole extends Command<Bot>
                 }
             });
 
+            // error check valid/invalid roles
             if (validRoles === '')
                 validRoles = '\u200b';
             if (invalidRoles === '')
                 invalidRoles = '\u200b';
 
+            // build output embed
             embed
                 .setColor(0x206694)
                 .setTitle(message.guild.name + ': Roles Update')            
@@ -154,6 +160,7 @@ export default class GetRole extends Command<Bot>
                 .setDescription('Valid Roles have been assigned, Invalid Roles could not be assigned.')
                 .setTimestamp();
             
+            // display output embed
             return message.channel.sendEmbed(embed, '', { disableEveryone: true });
         }
     }

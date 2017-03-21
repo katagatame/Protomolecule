@@ -24,7 +24,6 @@ Constants.allowRegExp = new RegExp('^(?:.allow\\s|.a\\s)(.+)', 'i');
 Constants.disallowRegExp = new RegExp('^(?:.disallow\\s|.d\\s)(.+[^\\s-s])', 'i');
 Constants.scrubRegExp = new RegExp('(?:-s)', 'i');
 Constants.destroyRegExp = new RegExp('^(?:.dr\\s)(.+)', 'i');
-Constants.getRegExp = new RegExp('[^,.gr\\s][^\\,]*[^,\\s]*', 'ig');
 
 Constants.avasaralaImages = [
     'http://i.imgur.com/gLAavTM.png',
