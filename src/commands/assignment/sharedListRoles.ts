@@ -10,7 +10,7 @@ export default class ListRoles extends Command<Bot>
     {
         super(bot, {
             name: 'list',
-            aliases: ['LIST', 'List', 'l'],
+            aliases: ['l'],
             description: 'List Roles',
             usage: '<prefix>list',
             extraHelp: 'Use this command to display a list of roles.',

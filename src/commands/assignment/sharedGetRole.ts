@@ -4,6 +4,7 @@ import { Bot, Command } from 'yamdbf';
 import { GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
 import Assignment from '../../util/assignment';
+import Constants from '../../util/constants';
 
 export default class GetRole extends Command<Bot>
 {
@@ -25,16 +26,15 @@ export default class GetRole extends Command<Bot>
         // variable declaration
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');
-        const re: RegExp = new RegExp('[^,.gr\\s][^\\,]*[^,\\s]*', 'ig');
-        let roleArgs: Array<any>;
-        let role: Role;
+        let roleArgs: Array<any> = new Array();;
+        let role: Role = new Role();
 
         // make sure there are allowed roles
         if (availableRoles === null)
             return message.channel.sendMessage('There are currently no self-assignable roles.');
         
-        if (re.test('.' + message.content))
-            roleArgs = ('.' + message.content).match(re);
+        if (Constants.getRegExp.test(message.content))
+            roleArgs = (message.content).match(Constants.getRegExp);
         else
             return message.channel.sendMessage('Please specify a role to self-assign.');
         

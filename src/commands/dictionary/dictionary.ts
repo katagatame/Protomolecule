@@ -2,10 +2,7 @@
 
 import { Bot, Command } from 'yamdbf';
 import { GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
-import * as fs from 'fs';
-import * as fuzzy from 'fuzzy';
-import * as gapi from 'googleapis';
-import Google from '../../util/google';
+import Constants from '../../util/constants';
 import Term from '../../util/term';
 
 export default class DisekowtelowdaDictionary extends Command<Bot>
@@ -27,12 +24,11 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
         // variable declaration
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         const terms: Array<Term> = guildStorage.getItem('BeltaTerms');
-        const re: RegExp = new RegExp('(?:.dd\\s)(.+)', 'i');        
         let query: string = '';
 
         // make sure a role was specified
-        if (re.test('.' + message.content))
-            query = re.exec('.' + message.content)[1];
+        if (Constants.ddRegExp.test(message.content))
+            query = Constants.ddRegExp.exec(message.content)[1];
         else
             return message.channel.sendMessage('Please specify a command.');
         
@@ -41,7 +37,6 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
         {
             case 'clist':
             case 'chars':
-            case 'characters':
             case 'shortcuts':
             case 'slist':
                 // build the embed
@@ -59,23 +54,14 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                 return message.channel.sendEmbed(embed, '', { disableEveryone: true });
 
             case 'sync':
-                // find admin command role
-                let adminRole: string = guildStorage.getItem('Admin Role');
-
-                if (adminRole === null)
-                    return message.channel.sendMessage('The is no `Admin Role` set.');
-
-                let adminCommandRole: Role = message.guild.roles.get(adminRole);
-
                 // make sure user has the admin command role
-                if (!message.member.roles.find('name', adminCommandRole.name))
+                if (!message.member.roles.find('name', 'The Rocinante'))
                     return message.channel.sendMessage('You do not permissions to run this command.');
 
                 if (!Term.updateTerms(guildStorage))
                     return message.channel.sendMessage('Terms have been updated!');
                 else
                     return message.channel.sendMessage('Terms have not been updated!  Check error logs.');
-
             default:
                 break;
         }

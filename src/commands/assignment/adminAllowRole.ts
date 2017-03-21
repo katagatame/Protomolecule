@@ -4,6 +4,7 @@ import { Bot, Command } from 'yamdbf';
 import { Collection, GuildMember, Message, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
 import Assignment from '../../util/assignment';
+import Constants from '../../util/constants';
 
 export default class AllowRole extends Command<Bot>
 {
@@ -11,7 +12,7 @@ export default class AllowRole extends Command<Bot>
     {
         super(bot, {
             name: 'allow',
-            aliases: ['ALLOW', 'Allow', 'a'],
+            aliases: ['a'],
             description: 'Allow Role',
             usage: '<prefix>allow <Role Name>',
             extraHelp: 'Use this command to allow roles to be self-assignable.',
@@ -24,17 +25,16 @@ export default class AllowRole extends Command<Bot>
     public action(message: Message, args: string[]): Promise<any>
     {
         // variable declaration
-        const re: RegExp = new RegExp('(?:.allow\\s|.a\\s)(.+)', 'i');
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         const serverRolesArray: Array<[string, Role]> = Array.from(message.guild.roles.entries());
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');
         let adminCommandRole: Role = message.guild.roles.find('name', 'The Rocinante');
         let roleArg: string = '';
-        let role: Role;        
+        let role: Role = new Role();        
 
         // make sure a role was specified
-        if (re.test('.' + message.content))
-            roleArg = re.exec('.' + message.content)[1];
+        if (Constants.allowRegExp.test(message.content))
+            roleArg = Constants.allowRegExp.exec(message.content)[1];
         else
             return message.channel.sendMessage('Please specify a role to allow.');
         

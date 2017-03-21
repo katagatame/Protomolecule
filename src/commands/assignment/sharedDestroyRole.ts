@@ -4,6 +4,7 @@ import { Bot, Command } from 'yamdbf';
 import { GuildMember, Message, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
 import Assignment from '../../util/assignment';
+import Constants from '../../util/constants';
 
 export default class DestroyRole extends Command<Bot>
 {
@@ -25,13 +26,12 @@ export default class DestroyRole extends Command<Bot>
         // variable declaration
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');
-        const re: RegExp = new RegExp('(?:.dr\\s)(.+)', 'i');
-        let roleArg: string;
-        let role: Role;
+        let roleArg: string = '';
+        let role: Role = new Role();
 
         // make sure a role was specified
-        if (re.test('.' + message.content))
-            roleArg = re.exec('.' + message.content)[1];
+        if (Constants.destroyRegExp.test(message.content))
+            roleArg = Constants.destroyRegExp.exec(message.content)[1];
         else
             return message.channel.sendMessage('Please specify a role to remove.');
 

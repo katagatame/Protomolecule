@@ -1,8 +1,19 @@
 'use strict';
 
 export type BotConstants = {
-    avasaralaImage: Array<string>,          // images supplied by /u/it-reaches-out
-    avasaralaQuotes: Array<string>,         // quotes supplied by /u/it-reaches-out
+    // RegExp
+    allowRegExp: RegExp,
+    disallowRegExp: RegExp,
+    scrubRegExp: RegExp,
+    destroyRegExp: RegExp,
+    getRegExp: RegExp,
+    ddRegExp: RegExp,
+
+    // avasarala, images and quotes supplied by /u/it-reaches-out
+    avasaralaImages: Array<string>,
+    avasaralaQuotes: Array<string>,
+
+    // disekowtalowda dictionary
     beltaSpreadSheetID: string,
     charcaterList: Array<[string, string]>,
     partsOfSpeech: Array<string>
@@ -10,7 +21,14 @@ export type BotConstants = {
 
 const Constants: BotConstants = <any> {};
 
-Constants.avasaralaImage = [
+Constants.allowRegExp = new RegExp('^(?:allow\\s|a\\s)(.+)', 'i');
+Constants.disallowRegExp = new RegExp('^(?:disallow\\s|d\\s)(.+[^\\s-s])', 'i');
+Constants.scrubRegExp = new RegExp('(?:-s)', 'i');
+Constants.destroyRegExp = new RegExp('^(?:dr\\s)(.+)', 'i');
+Constants.getRegExp = new RegExp('[^,gr\\s][^\\,]*[^,\\s]*', 'ig');
+Constants.ddRegExp = new RegExp('^(?:dd\\s)(.+)', 'i');
+
+Constants.avasaralaImages = [
     'http://i.imgur.com/gLAavTM.png',
     'http://i.imgur.com/BLW3xwc.png',
     'http://i.imgur.com/9naUBis.png',
@@ -72,7 +90,36 @@ Constants.avasaralaQuotes = [
     'How the fuck do you keep your hair like that? I look like a hedgehog\'s been humping my skull.'
 ];
 Constants.beltaSpreadSheetID = '1RCnWC3lQLmyo6P1IbLFB0n4x07d-oB5VqKxjv0R-EzY';
-Constants.charcaterList = [['á', '160'], ['é', '130'], ['í', '161'], ['ó', '162'], ['ú', '163']];
-Constants.partsOfSpeech = ['Adjective','Adverb','Article','Auxiliary Verb','Bound Morpheme','Conjunction','Determiner','Interjection','Noun','Noun Phrase','Number','Particle','Phrase','Prefix','Preposition','Pronoun','Proper Noun','Quantifier','Suffix','Tag Question','Verb','Verb Phrase',];
+Constants.charcaterList = [
+    ['á', '160'],
+    ['é', '130'],
+    ['í', '161'],
+    ['ó', '162'],
+    ['ú', '163']
+];
+Constants.partsOfSpeech = [
+    'Adjective',
+    'Adverb',
+    'Article',
+    'Auxiliary Verb',
+    'Bound Morpheme',
+    'Conjunction',
+    'Determiner',
+    'Interjection',
+    'Noun',
+    'Noun Phrase',
+    'Number',
+    'Particle',
+    'Phrase',
+    'Prefix',
+    'Preposition',
+    'Pronoun',
+    'Proper Noun',
+    'Quantifier',
+    'Suffix',
+    'Tag Question',
+    'Verb',
+    'Verb Phrase'
+];
 
 export default Constants;

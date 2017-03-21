@@ -4,6 +4,7 @@ import { Bot, Command } from 'yamdbf';
 import { GuildMember, Message, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
 import Assignment from '../../util/assignment';
+import Constants from '../../util/constants';
 
 export default class DisallowRole extends Command<Bot>
 {
@@ -11,7 +12,7 @@ export default class DisallowRole extends Command<Bot>
     {
         super(bot, {
             name: 'disallow',
-            aliases: ['DISALLOW', 'Disallow', 'd'],
+            aliases: ['d'],
             description: 'Disallow Role',
             usage: '<prefix>disallow <Role Name>',
             extraHelp: 'Use this command to disallow roles to be self-assignable.',
@@ -24,22 +25,21 @@ export default class DisallowRole extends Command<Bot>
     public action(message: Message, args: string[]): Promise<any>
     {
         // variable declaration
-        const re: RegExp = new RegExp('(?:.disallow\\s|.d\\s)(.+[^\\s-s])', 'i');
-        const reS: RegExp = new RegExp('(?:-s)', 'i');
+        
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');        
         let adminCommandRole: Role = message.guild.roles.find('name', 'The Rocinante');
         let roleArg: string = '';
-        let role: Role;
+        let role: Role = new Role();
         let scrub: Boolean = false;
 
         // make sure a role was specified
-        if (re.test('.' + message.content))
-            roleArg = re.exec('.' + message.content)[1];
+        if (Constants.disallowRegExp.test(message.content))
+            roleArg = Constants.disallowRegExp.exec(message.content)[1];
         else
             return message.channel.sendMessage('Please specify a role to disallow.');
         
-        if (reS.test(message.content))
+        if (Constants.scrubRegExp.test(message.content))
             scrub = true;
         
         // make sure available roles isn't empty
