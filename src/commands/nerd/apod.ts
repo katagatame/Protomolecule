@@ -77,19 +77,19 @@ export default class APoD extends Command<Bot>
                         }
                     }
                 }
-                
+
                 // set the imgEmbed title
                 title = (title === '') ? 'NASA Astronomy Picture of The Day' : title;
                 mediaEmbed.setAuthor(title);
 
-                // no image and no video               
+                // no image and no video
                 if (noImg && noVideo)
                     mediaEmbed.setDescription('*There is no embedable content for this date.*');
-                
+
                 // no image and video
                 if (noImg && !noVideo)
                     mediaEmbed.setDescription('*There is video content for this date.*\n' + content);
-                
+
                 // image and no video
                 if (!noImg && noVideo)
                     mediaEmbed.setImage(content);
@@ -100,11 +100,8 @@ export default class APoD extends Command<Bot>
                     .setColor(0x206694)
                     .setDescription(desc)
                     .setTimestamp();
-                
-                if (args[0] === 'r')
-                    embed.setAuthor('Explanation' + dateString);
-                else
-                    embed.setAuthor('Explanation');
+
+                (args[0] === 'r') ? embed.setAuthor('Explanation' + dateString) : embed.setAuthor('Explanation');
 
                 // output the two embeds
                 message.channel.sendMessage('', { embed: mediaEmbed });

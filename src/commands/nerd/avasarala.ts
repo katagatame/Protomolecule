@@ -23,7 +23,7 @@ export default class APoD extends Command<Bot>
         // variable declaration
         const quote: string = Constants.avasaralaQuotes[Math.floor(Math.random() * Constants.avasaralaQuotes.length)];
         const image: string = Constants.avasaralaImages[Math.floor(Math.random() * Constants.avasaralaImages.length)];
-        
+
         // build the quote
         const embed: RichEmbed = new RichEmbed()
             .setColor(0x206694)
@@ -32,7 +32,7 @@ export default class APoD extends Command<Bot>
             .addField('\u200b', '"' + quote + '"', false)
             .setFooter('/u/it-reaches-out')
             .setTimestamp();
-        
+
         // send the quote
         return message.channel.sendEmbed(embed, '', { disableEveryone: true });
     }

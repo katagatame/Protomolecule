@@ -23,7 +23,7 @@ export default class UserStats extends Command<Bot>
         // make sure user is logged in
         if (message.member === null)
             return message.channel.sendMessage('Please login in order to check your Discord stats.');
-        
+
         // variable declaration
         const guildMember: GuildMember = message.member;
         const joinDiscord: string = moment(guildMember.user.createdAt).format('lll') + '\n*' + moment(new Date()).diff(guildMember.user.createdAt, 'days') + ' days ago*';
