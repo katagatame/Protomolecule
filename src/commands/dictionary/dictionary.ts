@@ -1,7 +1,7 @@
 'use strict';
 
 import { Bot, Command } from 'yamdbf';
-import { GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
+import { Message, RichEmbed, Role, User } from 'discord.js';
 import Constants from '../../util/constants';
 import Term from '../../util/term';
 
@@ -13,7 +13,7 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
             name: 'dd',
             description: 'Disekowtelowda Dictionary',
             usage: '<prefix>dd',
-            extraHelp: 'Use this command to interact with the Disekowtelowda Dictionary, as a whole.',
+            extraHelp: 'Use this command to interact with the Disekowtelowda Dictionary as a whole.',
             group: 'dictionary',
             guildOnly: true
         });

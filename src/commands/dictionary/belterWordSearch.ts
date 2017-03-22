@@ -1,7 +1,7 @@
 'use strict';
 
 import { Bot, Command } from 'yamdbf';
-import { GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
+import { Message, RichEmbed, Role, User } from 'discord.js';
 import * as fs from 'fs';
 import * as fuzzy from 'fuzzy';
 import Constants from '../../util/constants'

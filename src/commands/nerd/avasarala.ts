@@ -1,6 +1,6 @@
 'use strict';
 import { Bot, Command } from 'yamdbf';
-import { Message, User, RichEmbed } from 'discord.js';
+import { Message, RichEmbed } from 'discord.js';
 import Constants from '../../util/constants';
 import Nerd from '../../util/nerd';
 
@@ -12,7 +12,7 @@ export default class APoD extends Command<Bot>
             name: 'ca',
             description: 'A Random Quote from Chrisjen Avasarala',
             usage: '<prefix>ca',
-            extraHelp: 'A command that returns A random quote from Chrisjen Avasarala.',
+            extraHelp: 'A command that returns a random quote from Chrisjen Avasarala.',
             group: 'nerd',
             guildOnly: true
         });

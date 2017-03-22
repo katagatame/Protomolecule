@@ -37,7 +37,7 @@ export default class Assignment
         return array.findIndex(a => a.name === item);        
     }
 
-    public static updateRoles(availableRoles: any, guildStorage: any, message: Message, role: Role): void
+    public static updateRoles(availableRoles: any, guildStorage: any, role: Role): void
     {
         if (availableRoles === null)
         {
@@ -63,4 +63,4 @@ export default class Assignment
         });
         return message.channel.sendMessage(`\`${role.name}\` successfully disallowed and removed from \`${count}\` users.`);
     }
-}
+};

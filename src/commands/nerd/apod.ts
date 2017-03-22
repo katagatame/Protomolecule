@@ -1,6 +1,6 @@
 'use strict';
 import { Bot, Command } from 'yamdbf';
-import { Message, User, RichEmbed } from 'discord.js';
+import { Message, RichEmbed } from 'discord.js';
 import * as request from 'request-promise';
 import * as cheerio from 'cheerio';
 import * as moment from 'moment';
