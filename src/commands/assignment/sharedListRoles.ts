@@ -41,21 +41,18 @@ export default class ListRoles extends Command<Bot>
                 return message.channel.sendMessage('Please make sure your admin role isn\'t the lowest in the list.');
 
             // iterate through server roles to build leftCol/rightCol
-            serverRoles.forEach((el: any) => {
+            serverRoles.forEach((el: Role) => {
                 // grab all roles below Admin Role, exclude @everyone and bots
                 if (el.position < adminCommandRole.position && el.name !== '@everyone' && el.managed === false)
                 {
                     leftCol += '\n' + el.name;
-                    if (Assignment.existsInArray(availableRoles, el.name))
-                        rightCol += '\n**Allowed**';
-                    else
-                        rightCol += '\nNot Allowed';
+                    rightCol += (Assignment.existsInArray(availableRoles, el.name)) ? '\n**Allowed**' : '\nNot Allowed';
                 }
             });
 
             // build the output embed
             const modEmbed: RichEmbed = new RichEmbed()
-                .setColor(0x206694)
+                .setColor(0x274E13)
                 .setAuthor(message.guild.name + ': List of Roles', message.guild.iconURL)
                 .addField('Roles', leftCol, true)
                 .addField('Status', rightCol, true)
@@ -74,7 +71,7 @@ export default class ListRoles extends Command<Bot>
             
             // build the output embed
             const userEmbed: RichEmbed = new RichEmbed()
-                .setColor(0x206694)
+                .setColor(0x274E13)
                 .setAuthor(message.guild.name + ': List of Roles', message.guild.iconURL)
                 .setDescription('Run `.gr *.` to get all available roles.')
                 .addField('Roles', leftCol, true)
@@ -84,4 +81,4 @@ export default class ListRoles extends Command<Bot>
             return message.channel.sendEmbed(userEmbed, '', { disableEveryone: true });
         }
     }
-}
+};

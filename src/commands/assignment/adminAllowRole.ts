@@ -1,10 +1,9 @@
 'use strict';
 
 import { Bot, Command } from 'yamdbf';
-import { Collection, GuildMember, Message, RichEmbed, Role, User } from 'discord.js';
+import { Message, RichEmbed, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
 import Assignment from '../../util/assignment';
-import Constants from '../../util/constants';
 
 export default class AllowRole extends Command<Bot>
 {
@@ -14,7 +13,7 @@ export default class AllowRole extends Command<Bot>
             name: 'allow',
             aliases: ['a'],
             description: 'Allow Role',
-            usage: '<prefix>allow <Role Name>',
+            usage: '<prefix>allow <Role Name>, <prefix>a <Role Name>',
             extraHelp: 'Use this command to allow roles to be self-assignable.',
             group: 'assignment',
             roles: ['The Rocinante'],
@@ -35,12 +34,12 @@ export default class AllowRole extends Command<Bot>
         // make sure a role was specified
         if (args.length === 0)
             return message.channel.sendMessage('Please specify a role to allow.');
-
+        
         // create array from user input
         roleArgs = args.map((el: any) => { return el.replace(',', ''); });
         
         // map roles
-        let roleMap: Array<any> = serverRolesArray.filter((el: any) => {
+        let roleMap: any = serverRolesArray.filter((el: any) => {
             if (el[1].position < adminCommandRole.position && el[1].name !== '@everyone' && el[1].managed === false)
                 return el[1];
         });
@@ -55,7 +54,7 @@ export default class AllowRole extends Command<Bot>
             // check if role is valid
             if (results.length === 0)
                 return message.channel.sendMessage(`\`${roleArgs[0]}\` is not a valid role.`);
-            
+
             // allow role
             if (results.length === 1)
             {
@@ -67,7 +66,7 @@ export default class AllowRole extends Command<Bot>
                     return message.channel.sendMessage(`\`${role.name}\` is already an allowed role.`);
 
                 // update roles
-                Assignment.updateRoles(availableRoles, guildStorage, message, role);
+                Assignment.updateRoles(availableRoles, guildStorage, role);
                 return message.channel.sendMessage(`\`${role.name}\` successfully allowed.`);
             }
 
@@ -85,7 +84,7 @@ export default class AllowRole extends Command<Bot>
                         return message.channel.sendMessage(`\`${role.name}\` is already an allowed role.`);
                     
                     // update roles
-                    Assignment.updateRoles(availableRoles, guildStorage, message, role);
+                    Assignment.updateRoles(availableRoles, guildStorage, role);
                     return message.channel.sendMessage(`\`${role.name}\` successfully allowed.`);
                 }
                 else
@@ -110,7 +109,7 @@ export default class AllowRole extends Command<Bot>
                 // check if role is valid
                 if (results.length === 0)
                     invalidRoles.push(el);
-                
+
                 // if one role found
                 if (results.length === 1)
                 {
@@ -119,11 +118,13 @@ export default class AllowRole extends Command<Bot>
 
                     // check if role already is allowed
                     if (Assignment.doesRoleExist(availableRoles, role))
+                        // add role to invalid array
                         invalidRoles.push(el);
                     else
+                        // add role to valid array
                         validRoles.push(role);
                 }
-                
+
                 // if more than one role found
                 if (results.length > 1)
                 {
@@ -136,16 +137,18 @@ export default class AllowRole extends Command<Bot>
                         // check if role already is allowed
                         if (Assignment.doesRoleExist(availableRoles, role))
                             invalidRoles.push(role.name);
-                        
+
+                        // add role to valid array
                         validRoles.push(role);
                     }
                     else
+                        // add inspecific results to invalid array
                         results.forEach((el: any) => { invalidRoles.push(el.string); });
                 }
             });
 
             // update roles
-            validRoles.forEach((el: Role) => { Assignment.updateRoles(availableRoles, guildStorage, message, el); });
+            validRoles.forEach((el: Role) => { Assignment.updateRoles(availableRoles, guildStorage, el); });
 
             // build output embed
             embed
@@ -160,4 +163,4 @@ export default class AllowRole extends Command<Bot>
             return message.channel.sendEmbed(embed, '', { disableEveryone: true });
         }
     }
-}
+};

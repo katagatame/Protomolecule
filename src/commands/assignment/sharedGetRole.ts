@@ -12,10 +12,9 @@ export default class GetRole extends Command<Bot>
     {
         super(bot, {
             name: 'gr',
-            aliases: ['GR', 'gR', 'Gr'],
             description: 'Get Role',
             usage: '<prefix>gr <Role Name>',
-            extraHelp: 'Use this command to obtain a specific role.',
+            extraHelp: 'Get one of the specified self-assignable roles.',
             group: 'assignment',
             guildOnly: true
         });
@@ -30,13 +29,13 @@ export default class GetRole extends Command<Bot>
         let role: Role;
 
         // make sure there are allowed roles
-        if (availableRoles === null)
+        if (availableRoles === null || availableRoles.length === 0)
             return message.channel.sendMessage('There are currently no self-assignable roles.');
 
         // make sure a role was specified
         if (args.length === 0)
             return message.channel.sendMessage('Please specify a role to assign.');
-        
+
         // create array from user input
         roleArgs = args.map((el: any) => { return el.replace(',', ''); });
 
@@ -47,7 +46,7 @@ export default class GetRole extends Command<Bot>
             if (roleArgs[0] === '*.')
             {
                 availableRoles.forEach((el: any) => { message.member.addRole(el.id); });
-                return message.channel.sendMessage(`\`${availableRoles.map((el: any) => {return el.name}).join('`, `')}\` successfully assigned.`);
+                return message.channel.sendMessage(`\`${availableRoles.map((el: any) => { return el.name; }).join('`, `')}\` successfully assigned.`);
             }
 
             // search for role
@@ -97,8 +96,8 @@ export default class GetRole extends Command<Bot>
         if (roleArgs.length > 1)
         {
             // variable declaration
-            let invalidRoles: string = '';
-            let validRoles: string = '';
+            let invalidRoles: Array<string> = new Array();
+            let validRoles: Array<Role> = new Array();
             const embed: RichEmbed = new RichEmbed();
 
             roleArgs.forEach((el: any) => {
@@ -108,18 +107,14 @@ export default class GetRole extends Command<Bot>
 
                 // check if role is valid
                 if (results.length === 0)
-                    invalidRoles += el + '\n';
+                    invalidRoles.push(el);
                 
                 // assign role
                 if (results.length === 1)
                 {
-                    // try to find user
-                    message.guild.fetchMember(message.author.id).then((user: GuildMember) => {
-                        user.addRole(results[0].original.id);
-                    }).catch((err: any) => {
-                        return message.channel.sendMessage(`User could not be found.`);
-                    });
-                    validRoles += results[0].original.name + '\n';
+                    // role from result
+                    role = message.guild.roles.get(results[0].original.id);
+                    validRoles.push(role);
                 }
 
                 // more than one role found
@@ -130,14 +125,7 @@ export default class GetRole extends Command<Bot>
                     {
                         // grab the role to be assigned
                         role = message.guild.roles.find('name', Assignment.getSpecificRoleName(results, el));
-
-                        // try to find user
-                        message.guild.fetchMember(message.author.id).then((user: GuildMember) => {
-                            user.addRole(role);
-                        }).catch((err: any) => {
-                            return message.channel.sendMessage(`User could not be found.`);
-                        });
-                        validRoles += role.name + '\n';
+                        validRoles.push(role);
                     }
                     else
                         // be more specific
@@ -145,18 +133,15 @@ export default class GetRole extends Command<Bot>
                 }
             });
 
-            // error check valid/invalid roles
-            if (validRoles === '')
-                validRoles = '\u200b';
-            if (invalidRoles === '')
-                invalidRoles = '\u200b';
+            // assign roles
+            validRoles.forEach((el: Role) => { message.guild.member(message.author.id).addRole(el); });
 
             // build output embed
             embed
                 .setColor(0x206694)
-                .setTitle(message.guild.name + ': Roles Update')            
-                .addField('Assigned Roles', validRoles, true)
-                .addField('Invalid Roles', invalidRoles, true)
+                .setTitle(message.guild.name + ': Roles Update')
+                .addField('Assigned Roles', validRoles.join('\n') ? validRoles.join('\n') : '\u200b', true)
+                .addField('Invalid Roles', invalidRoles.join('\n') ? invalidRoles.join('\n') : '\u200b', true)
                 .setDescription('Invalid Roles are either already allowed, incorrectly typed, or not a current server role.')
                 .setTimestamp();
             
@@ -164,4 +149,4 @@ export default class GetRole extends Command<Bot>
             return message.channel.sendEmbed(embed, '', { disableEveryone: true });
         }
     }
-}
+};

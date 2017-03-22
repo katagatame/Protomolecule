@@ -27,7 +27,6 @@ export default class SyncRoles extends Command<Bot>
         let updatedRoles: any = Array();
         let currentRoles: string = '';
         let removedRoles: string = '';
-
         const noRoles: RichEmbed = new RichEmbed()
             .setColor(0x206694)
             .setAuthor(message.guild.name + ': Role Synchronization', message.guild.iconURL)
@@ -62,7 +61,7 @@ export default class SyncRoles extends Command<Bot>
         
         // build the output embed
         const embed: RichEmbed = new RichEmbed()
-            .setColor(0x206694)
+            .setColor(0x274E13)
             .setAuthor(message.guild.name + ': Role Synchronization', message.guild.iconURL)
             .addField('Current Allowed Roles', currentRoles)
             .addField('Roles Cleaned from Allowed List', removedRoles)
@@ -71,4 +70,4 @@ export default class SyncRoles extends Command<Bot>
         // display the list
         return message.channel.sendEmbed(embed, '', { disableEveryone: true });
     }
-}
+};
