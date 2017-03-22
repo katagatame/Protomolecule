@@ -20,8 +20,11 @@ export default class APoD extends Command<Bot>
 
     public async action(message: Message, args: string[]): Promise<any>
     {
+        // variable declaration
         const quote: string = Constants.avasaralaQuotes[Math.floor(Math.random() * Constants.avasaralaQuotes.length)];
         const image: string = Constants.avasaralaImages[Math.floor(Math.random() * Constants.avasaralaImages.length)];
+        
+        // build the quote
         const embed: RichEmbed = new RichEmbed()
             .setColor(0x206694)
             .setAuthor('Chrisjen Avasarala says...', message.guild.iconURL)
@@ -30,6 +33,7 @@ export default class APoD extends Command<Bot>
             .setFooter('/u/it-reaches-out')
             .setTimestamp();
         
+        // send the quote
         return message.channel.sendEmbed(embed, '', { disableEveryone: true });
     }
 };

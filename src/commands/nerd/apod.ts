@@ -48,6 +48,11 @@ export default class APoD extends Command<Bot>
         request(options)
             .then(function ($: any)
             {
+                // variable declaration
+                let noImg: boolean = false;
+                let noVideo: boolean = true;
+                let mediaEmbed: RichEmbed = new RichEmbed();
+                
                 // grab the important stuff
                 const img: string = $('img').attr('src');
                 const iFrame: string = $('iframe').attr('src');
@@ -57,9 +62,6 @@ export default class APoD extends Command<Bot>
                     .replace(/(\s)+/g, ' ')
                     .replace(/(\r\n|\n|\r)/gm, '')
                     .replace(/(Explanation:)/, '');
-                let noImg: boolean = false;
-                let noVideo: boolean = true;
-                let mediaEmbed: RichEmbed = new RichEmbed();
 
                 // check for video content
                 if (img === undefined)

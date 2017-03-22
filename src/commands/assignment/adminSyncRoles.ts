@@ -25,8 +25,8 @@ export default class SyncRoles extends Command<Bot>
         const availableRoles: Array<any> = guildStorage.getItem('Server Roles');
         const serverRoles: Collection<string, Role> = new Collection(Array.from(message.guild.roles.entries()).sort((a: any, b: any) => b[1].position - a[1].position));
         let updatedRoles: any = Array();
-        let currentRoles: string = String();
-        let removedRoles: string = String();
+        let currentRoles: string = '';
+        let removedRoles: string = '';
 
         const noRoles: RichEmbed = new RichEmbed()
             .setColor(0x206694)

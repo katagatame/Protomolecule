@@ -29,9 +29,9 @@ export default class DisallowRole extends Command<Bot>
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');        
         let adminCommandRole: Role = message.guild.roles.find('name', 'The Rocinante');
-        let roleArg: string = '';
-        let role: Role;
         let scrub: Boolean = false;
+        let roleArg: string = '';
+        let role: Role;        
 
         // make sure a role was specified
         if (Constants.disallowRegExp.test(message.content))

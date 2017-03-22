@@ -26,7 +26,7 @@ export default class GetRole extends Command<Bot>
         // variable declaration
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         let availableRoles: Array<any> = guildStorage.getItem('Server Roles');
-        let roleArgs: Array<any> = new Array();;
+        let roleArgs: Array<any> = new Array();
         let role: Role;
 
         // make sure there are allowed roles
@@ -155,9 +155,9 @@ export default class GetRole extends Command<Bot>
             embed
                 .setColor(0x206694)
                 .setTitle(message.guild.name + ': Roles Update')            
-                .addField('Valid Roles Assigned', validRoles, true)
+                .addField('Assigned Roles', validRoles, true)
                 .addField('Invalid Roles', invalidRoles, true)
-                .setDescription('Valid Roles have been assigned, Invalid Roles could not be assigned.')
+                .setDescription('Invalid Roles are either already allowed, incorrectly typed, or not a current server role.')
                 .setTimestamp();
             
             // display output embed

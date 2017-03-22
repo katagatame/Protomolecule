@@ -36,6 +36,10 @@ export default class ListRoles extends Command<Bot>
 
         if (adminCommandRole !== undefined && message.member.roles.find('name', adminCommandRole.name))
         {
+            // make sure admin role isn't the lowest in the list
+            if (adminCommandRole.position === 1)
+                return message.channel.sendMessage('Please make sure your admin role isn\'t the lowest in the list.');
+
             // iterate through server roles to build leftCol/rightCol
             serverRoles.forEach((el: any) => {
                 // grab all roles below Admin Role, exclude @everyone and bots
