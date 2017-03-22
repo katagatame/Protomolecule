@@ -22,7 +22,7 @@ const Constants: BotConstants = <any> {};
 
 Constants.allowRegExp = new RegExp('^(?:.allow\\s|.a\\s)(.+)', 'i');
 Constants.disallowRegExp = new RegExp('^(?:.disallow\\s|.d\\s)(.+[^\\s-s])', 'i');
-Constants.scrubRegExp = new RegExp('(?:-s)', 'i');
+Constants.scrubRegExp = new RegExp('(?:-s)', 'ig');
 Constants.destroyRegExp = new RegExp('^(?:.dr\\s)(.+)', 'i');
 
 Constants.avasaralaImages = [
