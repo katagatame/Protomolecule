@@ -44,13 +44,8 @@ export default class DisallowRole extends Command<Bot>
             return message.channel.sendMessage(`No roles currently allowed.`);
 
         // create array from user input
-        roleArgs = message.content.match(Constants.cslRegExp);
-        roleArgs = roleArgs.filter((el: string) => {
-            return (!Constants.scrubRegExp.test(el)) ? true : false;
-        })
-        .map((el: string) => {
-            return el.toString().replace(Constants.disallowRegExp, '');
-        });
+        roleArgs = message.content.match(Constants.cslRegExp);        
+        roleArgs = roleArgs.map((el: string) => { return el.toString().replace(Constants.disallowRegExp, ''); });
 
         // if one role specified
         if (roleArgs.length === 1)

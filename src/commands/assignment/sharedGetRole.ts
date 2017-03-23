@@ -37,7 +37,7 @@ export default class GetRole extends Command<Bot>
             return message.channel.sendMessage('Please specify a role to assign.');
 
         // create array from user input
-        roleArgs = message.content.match(Constants.cslRegExp);
+        roleArgs = message.content.match(Constants.cslRegExp);        
         roleArgs = roleArgs.map((el: string) => { return el.toString().replace(Constants.getRegExp, ''); });
 
         // if one role specified

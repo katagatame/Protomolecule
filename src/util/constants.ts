@@ -22,11 +22,11 @@ export type BotConstants = {
 const Constants: BotConstants = <any> {};
 
 // RegExp
-Constants.allowRegExp = new RegExp('\\.allow\\s|\\.a\\s', 'i');
-Constants.cslRegExp = new RegExp('[^\\,\\s][^\\,]*[^\\,\\s]*', 'ig');
-Constants.destroyRegExp = new RegExp('\\.dr\\s', 'i');
-Constants.disallowRegExp = new RegExp('\\.disallow\\s|\\.d\\s', 'i');
-Constants.getRegExp = new RegExp('\\.gr\\s', 'i');
+Constants.allowRegExp = new RegExp('\.allow\\s|\.a\\s', 'i');
+Constants.cslRegExp = new RegExp('[^\,\\s][^\,]*[^\,\\s]*', 'ig');
+Constants.destroyRegExp = new RegExp('\.dr\\s', 'i');
+Constants.disallowRegExp = new RegExp('\.disallow\\s|\.d\\s', 'i');
+Constants.getRegExp = new RegExp('\.gr\\s', 'i');
 Constants.scrubRegExp = new RegExp('(?:-s)', 'ig');
 
 // avasarala, images and quotes supplied by /u/it-reaches-out
