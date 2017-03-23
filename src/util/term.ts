@@ -121,11 +121,11 @@ export default class Term
 
     public static getCharacterList(): Array<string>
     {
-        return Constants.charcaterList.map((el: any) => { return el[0]; });
+        return Constants.characterList.map((el: any) => { return el[0]; });
     }
 
     public static getShortcutList(): Array<string>
     {
-        return Constants.charcaterList.map((el: any) => { return el[1]; });
+        return Constants.characterList.map((el: any) => { return el[1]; });
     }
 };

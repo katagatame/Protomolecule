@@ -14,7 +14,7 @@ export type BotConstants = {
 
     // disekowtalowda dictionary
     beltaSpreadSheetID: string,
-    charcaterList: Array<[string, string]>,
+    characterList: Array<[string, string]>,
     partsOfSpeech: Array<string>
 }
 
@@ -87,7 +87,7 @@ Constants.avasaralaQuotes = [
     'How the fuck do you keep your hair like that? I look like a hedgehog\'s been humping my skull.'
 ];
 Constants.beltaSpreadSheetID = '1RCnWC3lQLmyo6P1IbLFB0n4x07d-oB5VqKxjv0R-EzY';
-Constants.charcaterList = [
+Constants.characterList = [
     ['á', '160'],
     ['é', '130'],
     ['í', '161'],
