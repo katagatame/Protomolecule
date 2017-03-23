@@ -36,7 +36,7 @@ export default class AllowRole extends Command<Bot>
             return message.channel.sendMessage('Please specify a role to allow.');
         
         // create array from user input
-        roleArgs = args.map((el: any) => { return el.replace(',', ''); });
+        roleArgs = args.map((el: string) => { return el.toString().replace(',', ''); });
         
         // map roles
         let roleMap: any = serverRolesArray.filter((el: any) => {

@@ -95,13 +95,11 @@ export default class Term
         const embed: RichEmbed = new RichEmbed()
             .setColor(0x206694)
             .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
-            .addField('Term', term.term + ' *' + term.pronunciation.replace('--', '\u200b') + '*',  false)
-            .addField('Part of Speech', term.partOfSpeech.replace('--', '\u200b'), true)
-            .addField('\u200b', '\u200b', true)
-            .addField('Usage', term.usage, true)
-            .addField('Definition', term.definition.replace('\\n\\n', '\u000d'), false)
-            .addField('Etymology', term.etymology.replace('\\n\\n', '\u000d').replace('--', '*no etymology information, yet...*'), false)            
-            .setTimestamp();
+            .setDescription('**' + term.term + '**  *' +
+                term.pronunciation.replace('--', '\u200b') + '*\n' +
+                term.partOfSpeech.replace('--', '\u200b').toLowerCase() + '\n\n' +
+                term.definition.replace('\\n\\n', '\u000d'))
+            .addField('Etymology', term.etymology.replace('\\n\\n', '\u000d').replace('--', '*no etymology information, yet...*'));
         return message.channel.sendEmbed(embed, '', { disableEveryone: true });
     }
 
