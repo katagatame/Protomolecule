@@ -3,10 +3,11 @@
 export type BotConstants = {
     // RegExp
     allowRegExp: RegExp,
-    disallowRegExp: RegExp,
-    scrubRegExp: RegExp,
+    cslRegExp: RegExp,
     destroyRegExp: RegExp,
+    disallowRegExp: RegExp,
     getRegExp: RegExp,
+    scrubRegExp: RegExp,
 
     // avasarala, images and quotes supplied by /u/it-reaches-out
     avasaralaImages: Array<string>,
@@ -20,11 +21,15 @@ export type BotConstants = {
 
 const Constants: BotConstants = <any> {};
 
-Constants.allowRegExp = new RegExp('^(?:.allow\\s|.a\\s)(.+)', 'i');
-Constants.disallowRegExp = new RegExp('^(?:.disallow\\s|.d\\s)(.+[^\\s-s])', 'i');
+// RegExp
+Constants.allowRegExp = new RegExp('\\.allow\\s|\\.a\\s', 'i');
+Constants.cslRegExp = new RegExp('[^\\,\\s][^\\,]*[^\\,\\s]*', 'ig');
+Constants.destroyRegExp = new RegExp('\\.dr\\s', 'i');
+Constants.disallowRegExp = new RegExp('\\.disallow\\s|\\.d\\s', 'i');
+Constants.getRegExp = new RegExp('\\.gr\\s', 'i');
 Constants.scrubRegExp = new RegExp('(?:-s)', 'ig');
-Constants.destroyRegExp = new RegExp('^(?:.dr\\s)(.+)', 'i');
 
+// avasarala, images and quotes supplied by /u/it-reaches-out
 Constants.avasaralaImages = [
     'http://i.imgur.com/gLAavTM.png',
     'http://i.imgur.com/BLW3xwc.png',
@@ -86,6 +91,8 @@ Constants.avasaralaQuotes = [
     'I don\'t mean that they all fuck men. I mean they\'re all men, the fuckers.',
     'How the fuck do you keep your hair like that? I look like a hedgehog\'s been humping my skull.'
 ];
+
+// disekowtalowda dictionary
 Constants.beltaSpreadSheetID = '1RCnWC3lQLmyo6P1IbLFB0n4x07d-oB5VqKxjv0R-EzY';
 Constants.characterList = [
     ['á', '160'],

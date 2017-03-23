@@ -4,6 +4,7 @@ import { Bot, Command } from 'yamdbf';
 import { Message, RichEmbed, Role, User } from 'discord.js';
 import * as fuzzy from 'fuzzy';
 import Assignment from '../../util/assignment';
+import Constants from '../../util/constants';
 
 export default class AllowRole extends Command<Bot>
 {
@@ -36,7 +37,8 @@ export default class AllowRole extends Command<Bot>
             return message.channel.sendMessage('Please specify a role to allow.');
         
         // create array from user input
-        roleArgs = args.map((el: string) => { return el.toString().replace(',', ''); });
+        roleArgs = message.content.match(Constants.cslRegExp);
+        roleArgs = roleArgs.map((el: string) => { return el.toString().replace(Constants.allowRegExp, ''); });
         
         // map roles
         let roleMap: any = serverRolesArray.filter((el: any) => {

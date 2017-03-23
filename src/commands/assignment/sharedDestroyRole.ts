@@ -37,7 +37,8 @@ export default class DestroyRole extends Command<Bot>
             return message.channel.sendMessage('Please specify a role to assign.');
 
         // create array from user input
-        roleArgs = args.map((el: string) => { return el.toString().replace(',', ''); });
+        roleArgs = message.content.match(Constants.cslRegExp);
+        roleArgs = roleArgs.map((el: string) => { return el.toString().replace(Constants.destroyRegExp, ''); });
         
         // if one role specified
         if (roleArgs.length === 1)
