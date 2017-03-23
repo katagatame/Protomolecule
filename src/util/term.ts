@@ -119,6 +119,15 @@ export default class Term
         return results;
     }
 
+    public static getCharacterListString(): string
+    {
+        let cList: string = '';
+        Constants.characterList.forEach((el: any) => {
+            cList += `\`Alt\` + \`` + el[1] + `\` = \`` + el[0] + `\`\n`;
+        });
+        return cList;
+    }
+
     public static getCharacterList(): Array<string>
     {
         return Constants.characterList.map((el: any) => { return el[0]; });

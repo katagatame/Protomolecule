@@ -51,7 +51,8 @@ export default class APoD extends Command<Bot>
                 // variable declaration
                 let noImg: boolean = false;
                 let noVideo: boolean = true;
-                let mediaEmbed: RichEmbed = new RichEmbed();
+                let mediaEmbed: RichEmbed = new RichEmbed()
+                    .setColor(0x206694);
                 
                 // grab the important stuff
                 const img: string = $('img').attr('src');
@@ -98,8 +99,7 @@ export default class APoD extends Command<Bot>
                 desc = (desc === '') ? '*There is no explanation for this content.*' : desc;
                 let embed: RichEmbed = new RichEmbed()
                     .setColor(0x206694)
-                    .setDescription(desc)
-                    .setTimestamp();
+                    .setDescription(desc);
 
                 (args[0] === 'r') ? embed.setAuthor('Explanation' + dateString) : embed.setAuthor('Explanation');
 

@@ -31,8 +31,7 @@ export default class ListRoles extends Command<Bot>
         const noRoles: RichEmbed = new RichEmbed()
             .setColor(0x206694)
             .setTitle(message.guild.name + ': Role Synchronization')            
-            .addField('Current Allowed Roles', '\nNo roles currently allowed.')
-            .setTimestamp();
+            .addField('Current Allowed Roles', '\nNo roles currently allowed.');
 
         if (adminCommandRole !== undefined && message.member.roles.find('name', adminCommandRole.name))
         {
@@ -55,8 +54,7 @@ export default class ListRoles extends Command<Bot>
                 .setColor(0x274E13)
                 .setAuthor(message.guild.name + ': List of Roles', message.guild.iconURL)
                 .addField('Roles', leftCol, true)
-                .addField('Status', rightCol, true)
-                .setTimestamp();
+                .addField('Status', rightCol, true);
             
             // display the list
             return message.channel.sendEmbed(modEmbed, '', { disableEveryone: true });
@@ -74,8 +72,7 @@ export default class ListRoles extends Command<Bot>
                 .setColor(0x274E13)
                 .setAuthor(message.guild.name + ': List of Roles', message.guild.iconURL)
                 .setDescription('Run `.gr *.` to get all available roles.')
-                .addField('Roles', leftCol, true)
-                .setTimestamp();
+                .addField('Roles', leftCol, true);
             
             // display the list
             return message.channel.sendEmbed(userEmbed, '', { disableEveryone: true });

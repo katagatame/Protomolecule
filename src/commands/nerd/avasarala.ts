@@ -30,8 +30,7 @@ export default class APoD extends Command<Bot>
             .setAuthor('Chrisjen Avasarala says...', message.guild.iconURL)
             .setThumbnail(image)
             .addField('\u200b', '"' + quote + '"', false)
-            .setFooter('/u/it-reaches-out')
-            .setTimestamp();
+            .setFooter('/u/it-reaches-out');
 
         // send the quote
         return message.channel.sendEmbed(embed, '', { disableEveryone: true });

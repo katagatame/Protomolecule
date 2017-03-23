@@ -156,8 +156,7 @@ export default class AllowRole extends Command<Bot>
                 .setTitle(message.guild.name + ': Roles Update')            
                 .addField('Allowed Roles', validRoles.join('\n') ? validRoles.join('\n') : '\u200b', true)
                 .addField('Invalid Roles', invalidRoles.join('\n') ? invalidRoles.join('\n') : '\u200b', true)
-                .setDescription('Invalid Roles are either already allowed, incorrectly typed, or not a current server role.')
-                .setTimestamp();
+                .setDescription('Invalid Roles are either already allowed, incorrectly typed, or not a current server role.');
             
             // display output embed
             return message.channel.sendEmbed(embed, '', { disableEveryone: true });

@@ -10,7 +10,7 @@ export default class UserStats extends Command<Bot>
     {
         super(bot, {
             name: 'stats',
-            aliases: ['STATS', 'Stats', 's'],
+            aliases: ['s'],
             description: 'Display your discord stats.',
             usage: '<prefix>stats',
             group: 'stats',
@@ -60,8 +60,7 @@ export default class UserStats extends Command<Bot>
             .setDescription(status)
             .addField('Joined Server', joinServer, true)
             .addField('Joined Discord', joinDiscord, true)
-            .addField('Roles', rolesString, false)
-            .setTimestamp();
+            .addField('Roles', rolesString, false);
         
         // display stats
         return message.channel.sendEmbed(embed, '', { disableEveryone: true });

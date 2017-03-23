@@ -31,18 +31,15 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
         {
             case 'clist':
             case 'chars':
-            case 'shortcuts':
             case 'slist':
                 // build the embed
-                const cList: Array<string> = Term.getCharacterList();
-                const sList: Array<string> = Term.getShortcutList();
+                let cList: string = Term.getCharacterListString();
                 const embed: RichEmbed = new RichEmbed()
                     .setColor(0x206694)
                     .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
-                    .addField('Character', '`' + cList.join('\`\n\`') + '`', true)
-                    .addField('Keyboard Shortcut', '`' + sList.join('\`\n\`') + '`', true)
-                    .addField('Instructions', 'Press and hold `Alt`, then press a number combination.', false)
-                    .setTimestamp();
+                    .setTitle('Keyboard Shortcuts')
+                    .setDescription(cList)
+                    .addField('Instructions', 'Press and hold `Alt`, then press a number combination to produce one of the characters above.', false);
                 
                 // display the embed
                 return message.channel.sendEmbed(embed, '', { disableEveryone: true });
