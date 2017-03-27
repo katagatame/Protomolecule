@@ -16,15 +16,14 @@ export default class BelterWordSearch extends Command<Bot>
             description: 'Belta Word Search',
             usage: '<prefix>bt <Belta Term>',
             extraHelp: 'Use this command to look up a Belta term within the Disekowtalowda Dictionary.',
-            group: 'dictionary',
-            guildOnly: true
+            group: 'dictionary'
         });
     }
 
     public async action(message: Message, args: string[]): Promise<any>
     {
         // variable declaration
-        let guildStorage: any = this.bot.guildStorages.get(message.guild);
+        let guildStorage: any = this.bot.guildStorages.get(Constants.guildID);
         const belter: Array<Term> = guildStorage.getItem('BeltaTerms');
 
         // error checking
@@ -33,6 +32,10 @@ export default class BelterWordSearch extends Command<Bot>
             message.channel.sendMessage('Currently no terms in list, please sync the list with `.dd sync`.');
             return message.channel.stopTyping();
         }
+
+        // check if a term was specified
+        if (args.length === 0)
+            return message.channel.sendMessage('Please specify a term.');
 
         // serach for term
         let options: any = { extract: (el: any) => { return el.term; } };
@@ -69,7 +72,7 @@ export default class BelterWordSearch extends Command<Bot>
                     {
                         part = m.content.toLowerCase();
                         return m.content;
-                    }                    
+                    }
                 };
 
                 // send confirmation message
@@ -88,12 +91,10 @@ export default class BelterWordSearch extends Command<Bot>
                         let termResult: Term = new Term();
 
                         // grab the term based on user input
-                        let x = 0;
-                        while (x < termResults.length)
+                        for (let x: number = 0; x < termResults.length; x++)
                         {
                             if (termResults[x].partOfSpeech.toLowerCase() == part)
                                 termResult = termResults[x];
-                            x++;
                         }
 
                         // display definition
@@ -113,14 +114,12 @@ export default class BelterWordSearch extends Command<Bot>
                 let distinctTerms: Array<string> = new Array();
 
                 // build distinct term list for error message
-                let x = 0;
-                while (x < results.length)
+                for (let x: number = 0; x < results.length; x++)
                 {
                     if (distinctTerms.indexOf(results[x].original.term) === -1)
                         distinctTerms.push(results[x].original.term);
-                    x++;
                 }
-                
+
                 // display error message
                 return message.channel.sendMessage(`More than one term found: \`${distinctTerms.join('\`, \`')}\`.  Please re-run the command and be more specific.`);
             }

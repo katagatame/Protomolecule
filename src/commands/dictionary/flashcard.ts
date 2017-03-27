@@ -4,6 +4,7 @@ import { Bot, Command, RateLimit } from 'yamdbf';
 import { Message, MessageReaction, RichEmbed, Role, User } from 'discord.js';
 import * as fs from 'fs';
 import * as fuzzy from 'fuzzy';
+import Constants from '../../util/constants';
 import Nerd from '../../util/nerd';
 import Term from '../../util/term';
 
@@ -28,14 +29,14 @@ export default class BelterWordSearch extends Command<Bot>
     public async action(message: Message, args: string[]): Promise<any>
     {
         // variable declaration
-        let guildStorage: any = this.bot.guildStorages.get(message.guild);
+        let guildStorage: any = this.bot.guildStorages.get(Constants.guildID);
         const belter: Array<Term> = guildStorage.getItem('BeltaTerms');
         let term: Term = belter[Math.floor(Math.random() * belter.length)];
         let userReaction: boolean = false;
 
         if (term.definition == '--')
             term = belter[Math.floor(Math.random() * belter.length)];
-        
+
         let terms: Array<Term> = new Array();
         let index: number = 0;
 
@@ -79,7 +80,7 @@ export default class BelterWordSearch extends Command<Bot>
                     {
                         userReaction = true;
                         m.clearReactions();
-                        return message.channel.sendMessage('Yes, *' + term.term + '*  is correct!')
+                        return message.channel.sendMessage('Yes, *' + term.term + '*  is correct!');
                     }
                     else
                     {

@@ -2,6 +2,7 @@
 
 import { Message, RichEmbed } from 'discord.js';
 import * as moment from 'moment';
+import Constants from '../util/constants';
 import Term from '../util/term';
 
 export default class Nerd
@@ -39,7 +40,7 @@ export default class Nerd
     {
         const embed: RichEmbed = new RichEmbed()
             .setColor(0x206694)
-            .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
+            .setAuthor('Disekowtalowda Dictionary', Constants.guildIconURL)
             .setDescription('\u000dThis belta term means **' +
                 terms[index].definition
                     .replace('1. ', '')
@@ -50,7 +51,7 @@ export default class Nerd
             .addField('\u200b', '3⃣  ' + terms[2].term + '\n\n4⃣  ' + terms[3].term, true)
             .setFooter('You must wait for all reactions to appear and then you will have 10 seconds to respond.');
 
-        var m: Message = await message.channel.sendEmbed(embed, '', { disableEveryone: true });
+        let m: Message = await message.channel.sendEmbed(embed, '', { disableEveryone: true });
 
         await m.react('1⃣');
         await m.react('2⃣');

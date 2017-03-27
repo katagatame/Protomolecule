@@ -94,7 +94,7 @@ export default class Term
     {
         const embed: RichEmbed = new RichEmbed()
             .setColor(0x206694)
-            .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
+            .setAuthor('Disekowtalowda Dictionary', Constants.guildIconURL)
             .setDescription('**' + term.term + '**  *' +
                 term.pronunciation.replace('--', '\u200b') + '*\n' +
                 term.partOfSpeech.replace('--', '\u200b').toLowerCase() + '\n\n' +

@@ -16,7 +16,11 @@ export type BotConstants = {
     // disekowtalowda dictionary
     beltaSpreadSheetID: string,
     characterList: Array<[string, string]>,
-    partsOfSpeech: Array<string>
+    partsOfSpeech: Array<string>,
+
+    // guild
+    guildID: string,
+    guildIconURL: string
 }
 
 const Constants: BotConstants = <any> {};
@@ -125,5 +129,9 @@ Constants.partsOfSpeech = [
     'Verb',
     'Verb Phrase'
 ];
+
+// guild
+Constants.guildID = '';
+Constants.guildIconURL = 'https://cdn.discordapp.com/icons/246683178134142979/c543a565a520da0e02e373934c269fcf.jpg';
 
 export default Constants;
