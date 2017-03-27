@@ -1,6 +1,8 @@
 'use strict'
 
+import { Message, RichEmbed } from 'discord.js';
 import * as moment from 'moment';
+import Term from '../util/term';
 
 export default class Nerd
 {
@@ -31,5 +33,30 @@ export default class Nerd
 
         // return array with url and datestring
         return ['http://apod.nasa.gov/apod/ap' + rY.slice(-2) + rM + rD + '.html', dateString];
+    }
+
+    public static async flashcardMessage(message: Message, terms: Array<Term>, index: number): Promise<Message>
+    {
+        const embed: RichEmbed = new RichEmbed()
+            .setColor(0x206694)
+            .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
+            .setDescription('\u000dThis belta term means **' +
+                terms[index].definition
+                    .replace('1. ', '')
+                    .replace('2. ', '** *or* **')
+                    .replace('\\n\\n', '') + 
+                    '**?')
+            .addField('\u200b', '1⃣  ' + terms[0].term + '\n\n2⃣  ' + terms[1].term, true)
+            .addField('\u200b', '3⃣  ' + terms[2].term + '\n\n4⃣  ' + terms[3].term, true)
+            .setFooter('You must wait for all reactions to appear and then you will have 10 seconds to respond.');
+
+        var m: Message = await message.channel.sendEmbed(embed, '', { disableEveryone: true });
+
+        await m.react('1⃣');
+        await m.react('2⃣');
+        await m.react('3⃣');
+        await m.react('4⃣');
+
+        return m;
     }
 };
