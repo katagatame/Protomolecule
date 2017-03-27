@@ -11,9 +11,9 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
     {
         super(bot, {
             name: 'dd',
-            description: 'Disekowtelowda Dictionary',
+            description: 'Disekowtalowda Dictionary',
             usage: '<prefix>dd',
-            extraHelp: 'Use this command to interact with the Disekowtelowda Dictionary as a whole.',
+            extraHelp: 'Use this command to interact with the Disekowtalowda Dictionary as a whole.',
             group: 'dictionary',
             guildOnly: true
         });
@@ -24,25 +24,23 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
         // variable declaration
         const guildStorage: any = this.bot.guildStorages.get(message.guild);
         const terms: Array<Term> = guildStorage.getItem('BeltaTerms');
-        let query: string = '';
 
         // evaluate the query
-        switch (args.join(' '))
+        switch (args[0])
         {
             case 'clist':
             case 'chars':
             case 'slist':
                 // build the embed
-                let cList: string = Term.getCharacterListString();
-                const embed: RichEmbed = new RichEmbed()
+                const cList: RichEmbed = new RichEmbed()
                     .setColor(0x206694)
                     .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
                     .setTitle('Keyboard Shortcuts')
-                    .setDescription(cList)
-                    .addField('Instructions', 'Press and hold `Alt`, then press a number combination to produce one of the characters above.', false);
+                    .setDescription(Term.getCharacterListString())
+                    .addField('Instructions', 'Press and hold `Alt`, then press a number combination to produce one of the characters above.\n*Windows platform*', false);
                 
                 // display the embed
-                return message.channel.sendEmbed(embed, '', { disableEveryone: true });
+                return message.channel.sendEmbed(cList, '', { disableEveryone: true });
 
             case 'sync':
                 // make sure user has the admin command role
@@ -53,8 +51,50 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                     return message.channel.sendMessage('Terms have been updated!');
                 else
                     return message.channel.sendMessage('Terms have not been updated!  Check error logs.');
+
+            case 'wl':
+                if (args[1].length === 1)
+                {
+                    const list: Array<string> = terms.filter((el: Term) => {
+                        if (args[1].charAt(0) === el.term.charAt(0))
+                            return true;
+                    }).map((el: Term) => {
+                        return el.term;
+                    });
+
+                    const wList: RichEmbed = new RichEmbed()
+                        .setColor(0x206694)
+                        .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL);
+
+                    if (list.length <= 10)
+                    {
+                        wList.addField(args[1].charAt(0).toUpperCase() + ' Terms', list, true);
+                        return message.channel.sendEmbed(wList, '', { disableEveryone: true });
+                    }
+
+                    if (list.length > 10 && list.length <= 20)
+                    {
+                        wList.addField(args[1].charAt(0).toUpperCase() + ' Terms', list.splice(0, 10), true);
+                        wList.addField('\u200b', list, true);
+                        return message.channel.sendEmbed(wList, '', { disableEveryone: true });
+                    }
+
+                    if (list.length > 20 && list.length <= 30)
+                    {
+                        wList.addField(args[1].charAt(0).toUpperCase() + ' Terms', list.splice(0, 10), true);
+                        wList.addField('\u200b', list.splice(0, 10), true);
+                        wList.addField('\u200b', list, true);
+                        return message.channel.sendEmbed(wList, '', { disableEveryone: true });
+                    }
+                    break;
+                }
+                else
+                {
+                    return message.channel.sendMessage(args[1]);
+                }
+
             default:
-                return message.channel.sendMessage('Please specify a command.');
+                return message.channel.sendMessage('Please specify a valid command.');
         }
     }
 };
