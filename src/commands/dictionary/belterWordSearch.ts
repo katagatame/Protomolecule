@@ -15,7 +15,7 @@ export default class BelterWordSearch extends Command<Bot>
             name: 'bt',
             description: 'Belta Word Search',
             usage: '<prefix>bt <Belta Term>',
-            extraHelp: 'Use this command to look up a Belta term within the Disekowtelowda Dictionary.',
+            extraHelp: 'Use this command to look up a Belta term within the Disekowtalowda Dictionary.',
             group: 'dictionary',
             guildOnly: true
         });

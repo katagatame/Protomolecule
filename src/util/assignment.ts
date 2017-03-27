@@ -34,7 +34,7 @@ export default class Assignment
 
     public static getRoleToRemove(array: Array<any>, item: string): number
     {
-        return array.findIndex(a => a.name === item);        
+        return array.findIndex(a => a.name === item);
     }
 
     public static updateRoles(availableRoles: any, guildStorage: any, role: Role): void
