@@ -34,7 +34,7 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                     .setAuthor('Disekowtalowda Dictionary', Constants.guildIconURL)
                     .setTitle('Keyboard Shortcuts')
                     .setDescription(Term.getCharacterListString())
-                    .addField('Instructions', 'Press and hold `Alt`, then press a number combination to produce one of the characters above.\n*Windows platform*', false);
+                    .addField('Instructions', 'Press and hold `Alt`, then press a number combination to produce one of the characters above.\n\n*Windows platform*', false);
                 
                 // display the embed
                 return message.channel.sendEmbed(cList, '', { disableEveryone: true });
