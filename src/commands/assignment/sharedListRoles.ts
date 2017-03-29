@@ -12,7 +12,7 @@ export default class ListRoles extends Command<Bot>
             name: 'list',
             aliases: ['l'],
             description: 'List Roles',
-            usage: '<prefix>list',
+            usage: '<prefix>list\u000d       <prefix>l',
             extraHelp: 'Use this command to display a list of roles.',
             group: 'assignment',
             guildOnly: true

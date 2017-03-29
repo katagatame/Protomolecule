@@ -14,8 +14,8 @@ export default class AllowRole extends Command<Bot>
             name: 'allow',
             aliases: ['a'],
             description: 'Allow Role',
-            usage: '<prefix>allow <Role Name>, <prefix>a <Role Name>',
-            extraHelp: 'Use this command to allow roles to be self-assignable.',
+            usage: '<prefix>allow <Argument>\u000d       <prefix>a <Argument>',
+            extraHelp: 'Argument information below...\u000d\u000d<Role Name> : The name of the role to be allowed.',
             group: 'assignment',
             roles: ['The Rocinante'],
             guildOnly: true

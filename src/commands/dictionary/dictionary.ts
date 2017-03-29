@@ -12,8 +12,8 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
         super(bot, {
             name: 'dd',
             description: 'Disekowtalowda Dictionary',
-            usage: '<prefix>dd',
-            extraHelp: 'Use this command to interact with the Disekowtalowda Dictionary as a whole.',
+            usage: '<prefix>dd <Argument> <Flag>?',
+            extraHelp: 'Argument information below...\u000d\u000dclist : Return a list of characters used in Belta.\u000dchars : Return a list of characters used in Belta.\u000dslist : Return a list of characters used in Belta.\u000dwl <a-z> : Return the list of <a-z> words ',
             group: 'dictionary',
             guildOnly: true
         });
@@ -55,12 +55,9 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
             case 'wl':
                 if (args[1].length === 1)
                 {
-                    const list: Array<string> = terms.filter((el: Term) => {
-                        if (args[1].charAt(0) === el.term.charAt(0))
-                            return true;
-                    }).map((el: Term) => {
-                        return el.term;
-                    });
+                    const list: Array<string> = terms
+                        .filter((el: Term) => { (args[1].charAt(0) === el.term.charAt(0)) ? true : false; })
+                        .map((el: Term) => { return el.term; });
 
                     const wList: RichEmbed = new RichEmbed()
                         .setColor(0x206694)

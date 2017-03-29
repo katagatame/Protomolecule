@@ -11,8 +11,8 @@ export default class UserStats extends Command<Bot>
         super(bot, {
             name: 'ss',
             description: 'Server Stats',
-            usage: '<prefix>ss <Argument>',
-            extraHelp: '',
+            usage: '<prefix>ss <Argument>?',
+            extraHelp: 'Argument information below...\u000d\u000droles : Return a list of roles and their member count.',
             group: 'stats',
             roles: ['The Rocinante'],
             guildOnly: true

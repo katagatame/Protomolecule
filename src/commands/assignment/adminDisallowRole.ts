@@ -14,8 +14,8 @@ export default class DisallowRole extends Command<Bot>
             name: 'disallow',
             aliases: ['d'],
             description: 'Disallow Role',
-            usage: '<prefix>disallow <Role Name>, <prefix>d <Role Name>',
-            extraHelp: 'Use this command to disallow roles to be self-assignable.',
+            usage: '<prefix>disallow <Argument>\u000d       <prefix>d <Argument>',
+            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be disallowed.',
             group: 'assignment',
             roles: ['The Rocinante'],
             guildOnly: true

@@ -13,8 +13,8 @@ export default class DestroyRole extends Command<Bot>
         super(bot, {
             name: 'dr',
             description: 'Destroy Role',
-            usage: '<prefix>dr <Role Name>',
-            extraHelp: 'Remove one of the specified self-assignable roles.',
+            usage: '<prefix>dr <Argument>\u000d       <prefix>dr <Argument>, <Argument>, ...',
+            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be removed.',
             group: 'assignment',
             guildOnly: true
         });

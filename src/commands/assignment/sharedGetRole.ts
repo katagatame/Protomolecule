@@ -13,8 +13,8 @@ export default class GetRole extends Command<Bot>
         super(bot, {
             name: 'gr',
             description: 'Get Role',
-            usage: '<prefix>gr <Role Name>',
-            extraHelp: 'Get one of the specified self-assignable roles.',
+            usage: '<prefix>gr <Argument>\u000d       <prefix>gr <Argument>, <Argument>, ...',
+            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be assigned.',
             group: 'assignment',
             guildOnly: true
         });
