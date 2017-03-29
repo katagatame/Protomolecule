@@ -60,4 +60,9 @@ export default class Nerd
 
         return m;
     }
+
+    public static pad(n: string): string
+    {
+        return (parseInt(n) < 10) ? ('0' + n) : n;
+    }
 };
