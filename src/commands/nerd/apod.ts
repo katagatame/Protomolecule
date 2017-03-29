@@ -14,7 +14,7 @@ export default class APoD extends Command<Bot>
             name: 'apod',
             description: 'NASA\'s Astronomy Picture of the Day',
             usage: '<prefix>apod <Argument>?',
-            extraHelp: 'Argument information below...\u000d\u000dr : Random APoD\u000d\u000d*Running the command without an argument returns the most recent APoD.',
+            extraHelp: 'This command will return the NASA Astronomy Picture of the Day, or a random one from the archive.\u000d\u000dArgument information below...\u000d\u000dr : Random APoD\u000d\u000d*Running the command without an argument returns the most recent APoD.',
             group: 'nerd'
         });
     }

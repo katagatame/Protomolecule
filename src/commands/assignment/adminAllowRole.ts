@@ -15,7 +15,7 @@ export default class AllowRole extends Command<Bot>
             aliases: ['a'],
             description: 'Allow Role',
             usage: '<prefix>allow <Argument>\u000d       <prefix>allow <Argument>, <Argument>, ...\u000d       <prefix>a <Argument>\u000d       <prefix>a <Argument>, <Argument>, ...\u000d',
-            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be allowed.\u000d\u000d*If Protomolecule tells you to be more specific, type the role as if it were case-sensitive. Protomolecule will then find your specific role.',
+            extraHelp: 'This command will allow a specific role to be self-assignable, via the Get Role command.\u000d\u000dArgument information below...\u000d\u000dRole Name : The name of the role to be allowed.\u000d\u000d*If Protomolecule tells you to be more specific, type the role as if it were case-sensitive. Protomolecule will then find your specific role.',
             group: 'assignment',
             roles: ['The Rocinante'],
             guildOnly: true

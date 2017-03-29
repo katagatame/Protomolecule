@@ -15,7 +15,7 @@ export default class APoD extends Command<Bot>
             name: 'xkcd',
             description: 'XKCD Comics',
             usage: '<prefix>xkcd <Argument>?',
-            extraHelp: 'Argument information below...\u000d\u000dr       : Random XKCD Comic\u000d1-1800+ : Specific XKCD Comic\u000d\u000d*Running the command without an argument returns the most recent XKCD comic.',
+            extraHelp: 'This command will return the latest XKCD Comic, a random one from the archive, or a specific comic.\u000d\u000dArgument information below...\u000d\u000dr       : Random XKCD Comic\u000d1-1800+ : Specific XKCD Comic\u000d\u000d*Running the command without an argument returns the most recent XKCD comic.',
             group: 'nerd'
         });
     }

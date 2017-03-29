@@ -13,7 +13,7 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
             name: 'dd',
             description: 'Disekowtalowda Dictionary',
             usage: '<prefix>dd <Argument> <Flag>?',
-            extraHelp: 'Argument information below...\u000d\u000dchars    : Return a list of characters used in Belta.\u000dwl <a-z> : Return the list of <a-z> words.',
+            extraHelp: 'This command interacts with the Dictionary as a whole.\u000d\u000dArgument information below...\u000d\u000dchars    : Return a list of characters used in Belta.\u000dwl <a-z> : Return the list of <a-z> words.\u000dsync     : Syncs Belta terms from the Google Sheet.\u000d\u000d*sync is only available to The Rocinante.',
             group: 'dictionary'
         });
     }

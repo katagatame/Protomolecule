@@ -14,7 +14,7 @@ export default class GetRole extends Command<Bot>
             name: 'gr',
             description: 'Get Role',
             usage: '<prefix>gr <Argument>\u000d       <prefix>gr <Argument>, <Argument>, ...',
-            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be assigned.\u000d\u000d*If Protomolecule tells you to be more specific, type the role as if it were case-sensitive. Protomolecule will then find your specific role.',
+            extraHelp: 'This command will assign a specific role to yourself.\u000d\u000dArgument information below...\u000d\u000dRole Name : The name of the role to be assigned.\u000d\u000d*If Protomolecule tells you to be more specific, type the role as if it were case-sensitive. Protomolecule will then find your specific role.',
             group: 'assignment',
             guildOnly: true
         });

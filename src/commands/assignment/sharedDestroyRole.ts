@@ -14,7 +14,7 @@ export default class DestroyRole extends Command<Bot>
             name: 'dr',
             description: 'Destroy Role',
             usage: '<prefix>dr <Argument>\u000d       <prefix>dr <Argument>, <Argument>, ...',
-            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be removed.\u000d\u000d*If Protomolecule tells you to be more specific, type the role as if it were case-sensitive. Protomolecule will then find your specific role.',
+            extraHelp: 'This command will remove a specific role from yourself.\u000d\u000dArgument information below...\u000d\u000dRole Name : The name of the role to be removed.\u000d\u000d*If Protomolecule tells you to be more specific, type the role as if it were case-sensitive. Protomolecule will then find your specific role.',
             group: 'assignment',
             guildOnly: true
         });
