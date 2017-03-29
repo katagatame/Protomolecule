@@ -40,6 +40,7 @@ export default class BelterWordSearch extends Command<Bot>
         let terms: Array<Term> = new Array();
         let index: number = 0;
 
+        // need better random for remaining terms, potential exists for duplicates
         terms.push(term);
         terms.push(belter[Math.floor(Math.random() * belter.length)]);
         terms.push(belter[Math.floor(Math.random() * belter.length)]);

@@ -32,14 +32,14 @@
     "yamdbf": "github:zajrik/yamdbf"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.0",
-    "@types/node": "^7.0.8",
-    "@types/request": "^0.0.41",
+    "@types/cheerio": "^0.22.1",
+    "@types/node": "^7.0.12",
+    "@types/request": "^0.0.42",
     "@types/request-promise": "^4.1.33",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.6",
     "tslint": "^4.5.1",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.2"
   }
 }
