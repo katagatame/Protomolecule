@@ -31,21 +31,40 @@ export default class BelterWordSearch extends Command<Bot>
         // variable declaration
         let guildStorage: any = this.bot.guildStorages.get(Constants.guildID);
         const belter: Array<Term> = guildStorage.getItem('BeltaTerms');
+        let pool: Array<number> = new Array(belter.length);
         let term: Term = belter[Math.floor(Math.random() * belter.length)];
-        let userReaction: boolean = false;
-
-        if (term.definition == '--')
-            term = belter[Math.floor(Math.random() * belter.length)];
-
         let terms: Array<Term> = new Array();
         let index: number = 0;
+        let userReaction: boolean = false;
 
-        // need better random for remaining terms, potential exists for duplicates
+        // if there is no definition, grab another
+        if (term.definition == '--')
+            term = belter[Math.floor(Math.random() * belter.length)];
+        
+        // build array of numbers to choose from
+        for (let x: number = 0; x < pool.length; x++)
+        {
+            pool[x] = (x + 1);
+        }
+
+        // first random term
+        let a: number = Math.floor(Math.random() * pool.length);
+        pool.splice(a, 1);
+
+        // second random term
+        let b: number = pool[Math.floor(Math.random() * pool.length)];
+        pool.splice(b, 1);
+
+        // third random term
+        let c: number = pool[Math.floor(Math.random() * pool.length)];
+        
+        // build term array for flashcard
         terms.push(term);
-        terms.push(belter[Math.floor(Math.random() * belter.length)]);
-        terms.push(belter[Math.floor(Math.random() * belter.length)]);
-        terms.push(belter[Math.floor(Math.random() * belter.length)]);
+        terms.push(belter[a]);
+        terms.push(belter[b]);
+        terms.push(belter[c]);
 
+        // randomize the terms
         let currentIndex: number = terms.length;
         let temporaryValue: Term = new Term();
         let randomIndex: number = 0;
@@ -60,29 +79,39 @@ export default class BelterWordSearch extends Command<Bot>
             terms[randomIndex] = temporaryValue;
         }
 
+        // find the corect term
         index = terms.findIndex((t: Term) => { return t.term === term.term; });
 
+        // send the flashcard
         let m: Message = await Nerd.flashcardMessage(message, terms, index);
 
+        // 10 second timer
         setTimeout(() => {
             m.clearReactions();
             if (!userReaction)
                 return message.channel.sendMessage('Time expired, the correct term was *' + term.term + '*.');
         }, 10e3);
 
+        // regex for correct response
         const re: RegExp = new RegExp((index + 1).toString(), 'i');
 
+        // listen for reactions
         this.bot.on('messageReactionAdd', (reaction: MessageReaction, user: User) => {
+            // is the raction on our flashcard?
             if (reaction.message.id === m.id)
             {  
+                // was it the command issuer?
                 if (user.id === message.author.id)
                 {
+                    // did they answer correctly?
                     if (reaction.emoji.name.match(re))
                     {
                         userReaction = true;
                         m.clearReactions();
                         return message.channel.sendMessage('Yes, *' + term.term + '*  is correct!');
                     }
+
+                    // no they didn't
                     else
                     {
                         userReaction = true;
@@ -90,6 +119,8 @@ export default class BelterWordSearch extends Command<Bot>
                         return message.channel.sendMessage('You are incorrect, the correct term was *' + term.term + '*.');
                     }
                 }
+
+                // no it wasn't
                 else
                 {
                     if (reaction.emoji.name.match(re))
