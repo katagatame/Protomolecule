@@ -12,7 +12,7 @@ export default class UserStats extends Command<Bot>
             name: 'ss',
             description: 'Server Stats',
             usage: '<prefix>ss <Argument>?',
-            extraHelp: 'Argument information below...\u000d\u000droles : Return a list of roles and their member count.',
+            extraHelp: 'Argument information below...\u000d\u000droles : Return a list of roles and their member count.\u000d\u000d*Running the command without an argument returns Server Information.',
             group: 'stats',
             roles: ['The Rocinante'],
             guildOnly: true

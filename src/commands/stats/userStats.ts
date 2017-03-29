@@ -11,8 +11,9 @@ export default class UserStats extends Command<Bot>
         super(bot, {
             name: 'stats',
             aliases: ['s'],
-            description: 'Display your discord stats.',
+            description: 'User Stats',
             usage: '<prefix>stats',
+            extraHelp: 'This command returns information regarding your Discord presence.',
             group: 'stats',
             guildOnly: true
         });

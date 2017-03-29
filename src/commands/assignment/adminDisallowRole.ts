@@ -14,8 +14,8 @@ export default class DisallowRole extends Command<Bot>
             name: 'disallow',
             aliases: ['d'],
             description: 'Disallow Role',
-            usage: '<prefix>disallow <Argument>\u000d       <prefix>d <Argument>',
-            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be disallowed.',
+            usage: '<prefix>disallow <Argument>\u000d       <prefix>disallow <Argument>, <Argument>, ...\u000d       <prefix>d <Argument>\u000d       <prefix>d <Argument>, <Argument>, ...\u000d',
+            extraHelp: 'Argument information below...\u000d\u000dRole Name : The name of the role to be disallowed.\u000d\u000d*If Protomolecule tells you to be more specific, type the role as if it were case-sensitive. Protomolecule will then find your specific role.',
             group: 'assignment',
             roles: ['The Rocinante'],
             guildOnly: true

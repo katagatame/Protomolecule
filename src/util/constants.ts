@@ -131,7 +131,7 @@ Constants.partsOfSpeech = [
 ];
 
 // guild
-Constants.guildID = '';
-Constants.guildIconURL = 'https://cdn.discordapp.com/icons/246683178134142979/c543a565a520da0e02e373934c269fcf.jpg';
+Constants.guildID = '288472445822959618';
+Constants.guildIconURL = 'https://cdn.discordapp.com/icons/288472445822959618/2f192af7943f8401fec6b2a2455eb16a.jpg';
 
 export default Constants;

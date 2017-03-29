@@ -13,28 +13,25 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
             name: 'dd',
             description: 'Disekowtalowda Dictionary',
             usage: '<prefix>dd <Argument> <Flag>?',
-            extraHelp: 'Argument information below...\u000d\u000dclist : Return a list of characters used in Belta.\u000dchars : Return a list of characters used in Belta.\u000dslist : Return a list of characters used in Belta.\u000dwl <a-z> : Return the list of <a-z> words ',
-            group: 'dictionary',
-            guildOnly: true
+            extraHelp: 'Argument information below...\u000d\u000dchars    : Return a list of characters used in Belta.\u000dwl <a-z> : Return the list of <a-z> words.',
+            group: 'dictionary'
         });
     }
 
     public async action(message: Message, args: string[]): Promise<any>
     {
         // variable declaration
-        const guildStorage: any = this.bot.guildStorages.get(message.guild);
+        let guildStorage: any = this.bot.guildStorages.get(Constants.guildID);
         const terms: Array<Term> = guildStorage.getItem('BeltaTerms');
 
         // evaluate the query
         switch (args[0])
         {
-            case 'clist':
             case 'chars':
-            case 'slist':
                 // build the embed
                 const cList: RichEmbed = new RichEmbed()
                     .setColor(0x206694)
-                    .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL)
+                    .setAuthor('Disekowtalowda Dictionary', Constants.guildIconURL)
                     .setTitle('Keyboard Shortcuts')
                     .setDescription(Term.getCharacterListString())
                     .addField('Instructions', 'Press and hold `Alt`, then press a number combination to produce one of the characters above.\n*Windows platform*', false);
@@ -53,15 +50,19 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                     return message.channel.sendMessage('Terms have not been updated!  Check error logs.');
 
             case 'wl':
-                if (args[1].length === 1)
+                if (args[1] !== undefined)
                 {
+                    console.log(args[1].charAt(0).toLowerCase());
+
                     const list: Array<string> = terms
-                        .filter((el: Term) => { (args[1].charAt(0) === el.term.charAt(0)) ? true : false; })
+                        .filter((el: Term) => { if (args[1].charAt(0).toLowerCase() ===  el.term.charAt(0).toLowerCase()) return el; })
                         .map((el: Term) => { return el.term; });
+                    
+                    console.log(list);
 
                     const wList: RichEmbed = new RichEmbed()
                         .setColor(0x206694)
-                        .setAuthor('Disekowtalowda Dictionary', message.guild.iconURL);
+                        .setAuthor('Disekowtalowda Dictionary', Constants.guildIconURL);
 
                     if (list.length <= 10)
                     {
@@ -83,15 +84,14 @@ export default class DisekowtelowdaDictionary extends Command<Bot>
                         wList.addField('\u200b', list, true);
                         return message.channel.sendEmbed(wList, '', { disableEveryone: true });
                     }
+
                     break;
                 }
                 else
-                {
-                    return message.channel.sendMessage(args[1]);
-                }
+                    return message.channel.sendMessage('Please specify a letter to search on.');
 
             default:
-                return message.channel.sendMessage('Please specify a valid command.');
+                return message.channel.sendMessage('Please specify a valid argument.');
         }
     }
 };

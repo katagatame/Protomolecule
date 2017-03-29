@@ -13,8 +13,7 @@ export default class APoD extends Command<Bot>
             description: 'A Random Quote from Chrisjen Avasarala',
             usage: '<prefix>ca',
             extraHelp: 'A command that returns a random quote from Chrisjen Avasarala.',
-            group: 'nerd',
-            guildOnly: true
+            group: 'nerd'
         });
     }
 
@@ -27,7 +26,7 @@ export default class APoD extends Command<Bot>
         // build the quote
         const embed: RichEmbed = new RichEmbed()
             .setColor(0x206694)
-            .setAuthor('Chrisjen Avasarala says...', message.guild.iconURL)
+            .setAuthor('Chrisjen Avasarala says...', Constants.guildIconURL)
             .setThumbnail(image)
             .addField('\u200b', '"' + quote + '"', false)
             .setFooter('/u/it-reaches-out');

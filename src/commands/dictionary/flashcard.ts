@@ -16,7 +16,7 @@ export default class BelterWordSearch extends Command<Bot>
             name: 'fc',
             description: 'Belta Flashcard',
             usage: '<prefix>fc',
-            extraHelp: '',
+            extraHelp: 'This command generates a flashcard of a random Belta term\'s definition and provide four(4) reactions for you to respond to.\u000d\u000dEach reaction is associated with an answer to the flashcard.\u000d\u000dClick on the appropriate reaction to answer.\u000d\u000dYou will have ten(10) seconds to respond.',
             group: 'dictionary',
             guildOnly: true,
             ratelimit: '1/10s'
