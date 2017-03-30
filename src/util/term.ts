@@ -14,6 +14,8 @@ export default class Term
     public definition: string;
     public usage: string;
     public etymology: string;
+    public notes: string;
+    public examples: string;
 
     public static updateTerms(guildStorage: any): boolean
     {
@@ -39,7 +41,7 @@ export default class Term
                 {
                     auth: auth,
                     spreadsheetId: Constants.beltaSpreadSheetID,
-                    range: 'Terms!A2:F',
+                    range: 'Terms!A2:H',
                 },
                 function(err: any, response: any)
                 {
@@ -49,7 +51,6 @@ export default class Term
                         error = true;
                         console.log('The API returned an error: ' + err);
                     }
-                        
 
                     // grab the data
                     var rows: any = response.values;
@@ -77,6 +78,8 @@ export default class Term
                             t.usage = row[3];
                             t.partOfSpeech = row[4];
                             t.etymology = row[5];
+                            t.notes = row[6];
+                            t.examples = row[7];
 
                             belter.push(t);
                         }
@@ -100,6 +103,10 @@ export default class Term
                 term.partOfSpeech.replace('--', '\u200b').toLowerCase() + '\n\n' +
                 term.definition.replace('\\n\\n', '\u000d'))
             .addField('Etymology', term.etymology.replace('\\n\\n', '\u000d').replace('--', '*no etymology information, yet...*'));
+            
+            if (term.notes !== '--')
+                embed.addField('Notes', term.notes.replace('\\n\\n', '\u000d'));        
+
         return message.channel.sendEmbed(embed, '', { disableEveryone: true });
     }
 
@@ -111,20 +118,13 @@ export default class Term
 
     public static getSpecificResults(array: Array<any>, item: string): Array<Term>
     {
-        let results: Array<Term> = new Array();
-        array.forEach((el: any) => {
-            if (el.original.term === item)
-                results.push(el.original);
-        });
-        return results;
+        return array.filter((el: any) => { if (el.original.term === item) return true; }).map((el: any) => { return el.original; })
     }
 
     public static getCharacterListString(): string
     {
         let cList: string = '';
-        Constants.characterList.forEach((el: any) => {
-            cList += `\`Alt\` + \`` + el[1] + `\` = \`` + el[0] + `\`\n`;
-        });
+        Constants.characterList.forEach((el: any) => { cList += `\`Alt\` + \`` + el[1] + `\` = \`` + el[0] + `\`\n`; });
         return cList;
     }
 

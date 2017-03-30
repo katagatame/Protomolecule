@@ -61,7 +61,7 @@ export default class BelterWordSearch extends Command<Bot>
                 // if single term found
                 if (termResults.length === 1)
                     return Term.sendTerm(message, termResults[0]);
-                
+
                 // define parts of speech
                 const re: RegExp = new RegExp(Constants.partsOfSpeech.join('|'), 'ig');
                 let part: string = '';
