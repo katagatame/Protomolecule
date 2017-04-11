@@ -27,5 +27,5 @@ const bot = new Bot({
 .start();
 
 bot.on('ready', () => bot.user.setAvatar('./img/avatar.jpg'));
-bot.once('ready', () => { bot.dmManager = new DMManager(bot, '296753647277309972'); });
+//bot.once('ready', () => { bot.dmManager = new DMManager(bot, '296753647277309972'); });
 bot.on('disconnect', () => process.exit());

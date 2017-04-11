@@ -1,8 +1,21 @@
 const gulp = require('gulp');
-const ts = require('gulp-typescript');
+const gulp_ts = require('gulp-typescript');
+const gulp_tslint = require('gulp-tslint');
+const tslint = require('tslint');
 const del = require('del');
 
-const project = ts.createProject('tsconfig.json');
+const project = gulp_ts.createProject('tsconfig.json');
+const linter = tslint.Linter.createProgram('tsconfig.json');
+
+gulp.task('tslint', () => {
+    gulp.src(['./src/**/*.ts'])
+      .pipe(gulp_tslint({
+			configuration: 'tslint.json',
+			formatter: 'prose',
+			program: linter
+		}))
+		.pipe(gulp_tslint.report());
+});
 
 gulp.task('default', () =>
 {
@@ -13,9 +26,6 @@ gulp.task('default', () =>
         .pipe(gulp.dest('bin/'));
 
     gulp.src('./src/config.json')
-        .pipe(gulp.dest('bin/'));
-    
-    gulp.src('./src/client_secret.json')
         .pipe(gulp.dest('bin/'));
 
     gulp.src('./src/img/*.*')
