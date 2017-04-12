@@ -1,8 +1,8 @@
 'use strict';
 
+import { OAuth2Client, GoogleAuth } from 'google-auth-library';
 import * as fs from 'fs';
 import * as readline from 'readline';
-import * as googleAuth from 'google-auth-library';
 
 export default class Google
 {
@@ -16,8 +16,8 @@ export default class Google
 		let clientSecret: string = credentials.installed.client_secret;
 		let clientId: string = credentials.installed.client_id;
 		let redirectUrl: string = credentials.installed.redirect_uris[0];
-		let auth: googleAuth = new googleAuth();
-		let oauth2Client: googleAuth.OAuth2 = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+		let auth: GoogleAuth;
+		let oauth2Client: OAuth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
 		// read in the token file
 		fs.readFile(this.TOKEN_PATH, (err: NodeJS.ErrnoException, token: Buffer) => {
@@ -36,7 +36,7 @@ export default class Google
 		});
 	}
 
-	public getNewToken(oauth2Client: googleAuth.OAuth2, callback: any): void
+	public getNewToken(oauth2Client: OAuth2Client, callback: any): void
 	{
 		// variable declaration
 		var authUrl: string = oauth2Client.generateAuthUrl({

@@ -1,8 +1,8 @@
 'use strict';
 
 import { Message, RichEmbed } from 'discord.js';
+import { API } from 'googleapis';
 import * as fs from 'fs';
-import * as gapi from 'googleapis';
 import Constants from '../util/constants';
 import Google from '../util/google';
 
@@ -35,9 +35,8 @@ export default class Term
 			// authorize and access content
 			new Google().authorize(JSON.parse(content.toString()), (auth: any) => {
 				// grab the Belter Creole GoogleSheet
-				let sheets: any = gapi.sheets('v4');
-				sheets.spreadsheets.values.get(
-				{
+				let sheets: any = API.sheets('v4');
+				sheets.spreadsheets.values.get({
 					auth: auth,
 					spreadsheetId: Constants.beltaSpreadSheetID,
 					range: 'Terms!A2:H',

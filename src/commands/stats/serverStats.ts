@@ -53,7 +53,7 @@ export default class UserStats extends Command<Client>
 				const serverCreated: string = moment(server.createdAt).format('lll') + '\n*' + moment(new Date()).diff(server.createdAt, 'days') + ' days ago*';
 				let online: Collection<string, GuildMember> = server.members.filter((el: GuildMember) => {
 					if (!el.user.bot && el.presence.status !== 'offline')
-						return el;
+						return true;
 				});
 
 				embed
@@ -61,7 +61,7 @@ export default class UserStats extends Command<Client>
 						online.size.toString() + ' Online\n' +
 						(server.memberCount - online.size).toString() + ' Offline\n**' +
 						server.memberCount + ' Total**', true)
-					.addField('Roles', server.roles.filter((el: Role) => { if (el.name !== '@everyone') return el; }).size, true)
+					.addField('Roles', server.roles.filter((el: Role) => { if (el.name !== '@everyone') return true; }).size, true)
 					.addField('Channels', server.channels.size.toString(), true)
 					.addField('Server Created', serverCreated, true);
 

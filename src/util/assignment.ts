@@ -54,7 +54,7 @@ export default class Assignment
 	public static removeRoleFromUserBase(message: Message, role: Role): Promise<Message | Message[]>
 	{
 		let count: number = 0;
-		message.guild.members.filter((user: GuildMember) => {
+		message.guild.members.forEach((user: GuildMember) => {
 			if (user.roles.find('name', role.name))
 			{
 				user.removeRole(role);
