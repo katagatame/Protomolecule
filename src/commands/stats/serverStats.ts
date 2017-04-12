@@ -68,4 +68,4 @@ export default class UserStats extends Command<Client>
 				return message.channel.sendEmbed(embed, '', { disableEveryone: true });
 		}
 	}
-};
+}

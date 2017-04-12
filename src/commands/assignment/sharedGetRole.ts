@@ -149,4 +149,4 @@ export default class GetRole extends Command<Client>
 			return message.channel.sendEmbed(embed, '', { disableEveryone: true });
 		}
 	}
-};
+}

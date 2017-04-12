@@ -42,12 +42,12 @@ export default class Assignment
 		if (availableRoles === undefined)
 		{
 			let newAvailableRoles: Array<any> = [{ 'id': role.id, 'name': role.name }];
-			guildStorage.setItem('Server Roles', newAvailableRoles);
+			guildStorage.set('Server Roles', newAvailableRoles);
 		}
 		else
 		{
 			availableRoles.push({ 'id': role.id, 'name': role.name });
-			guildStorage.setItem('Server Roles', availableRoles);
+			guildStorage.set('Server Roles', availableRoles);
 		}
 	}
 
@@ -63,4 +63,4 @@ export default class Assignment
 		});
 		return message.channel.sendMessage(`\`${role.name}\` successfully disallowed and removed from \`${count}\` users.`);
 	}
-};
+}

@@ -142,4 +142,4 @@ export default class DestroyRole extends Command<Client>
 			return message.channel.sendEmbed(embed, '', { disableEveryone: true });
 		}
 	}
-};
+}

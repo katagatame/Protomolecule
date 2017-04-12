@@ -15,4 +15,4 @@ export default class Comic
 	public month: string;
 	public year: string;
 	public news: string;
-};
+}

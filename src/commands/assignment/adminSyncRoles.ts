@@ -68,4 +68,4 @@ export default class SyncRoles extends Command<Client>
 		// display the list
 		return message.channel.sendEmbed(embed, '', { disableEveryone: true });
 	}
-};
+}

@@ -124,4 +124,4 @@ export default class BelterWordSearch extends Command<Client>
 			}
 		}
 	}
-};
+}

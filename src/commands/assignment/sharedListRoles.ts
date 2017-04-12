@@ -78,4 +78,4 @@ export default class ListRoles extends Command<Client>
 			return message.channel.sendEmbed(userEmbed, '', { disableEveryone: true });
 		}
 	}
-};
+}

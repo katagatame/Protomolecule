@@ -33,4 +33,4 @@ export default class APoD extends Command<Client>
 		// send the quote
 		return message.channel.sendEmbed(embed, '', { disableEveryone: true });
 	}
-};
+}

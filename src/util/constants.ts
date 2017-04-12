@@ -132,7 +132,8 @@ Constants.partsOfSpeech = [
 ];
 
 // guild
-Constants.guildID = '288472445822959618';
+// Constants.guildID = '288472445822959618'; // expanse
+Constants.guildID = '246683178134142979'; // development
 Constants.guildIconURL = 'https://cdn.discordapp.com/icons/288472445822959618/2f192af7943f8401fec6b2a2455eb16a.jpg';
 
 export default Constants;

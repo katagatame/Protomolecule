@@ -90,4 +90,4 @@ export default class DisekowtelowdaDictionary extends Command<Client>
 				return message.channel.sendMessage('Please specify a valid argument.');
 		}
 	}
-};
+}

@@ -36,7 +36,7 @@ export default class Nerd
 		return ['http://apod.nasa.gov/apod/ap' + rY.slice(-2) + rM + rD + '.html', dateString];
 	}
 
-	public static async flashcardMessage(message: Message, terms: Array<Term>, index: number): Promise<Message>
+	public static flashcardMessage(message: Message, terms: Array<Term>, index: number): any
 	{
 		const embed: RichEmbed = new RichEmbed()
 			.setColor(0x206694)
@@ -49,20 +49,26 @@ export default class Nerd
 					'**?')
 			.addField('\u200b', '1⃣  ' + terms[0].term + '\n\n2⃣  ' + terms[1].term, true)
 			.addField('\u200b', '3⃣  ' + terms[2].term + '\n\n4⃣  ' + terms[3].term, true)
-			.setFooter('You must wait for all reactions to appear and then you will have 10 seconds to respond.');
+			.setFooter('Type the number of the corresponding answer.');
 
-		let m: Message = await message.channel.sendEmbed(embed, '', { disableEveryone: true });
-
-		await m.react('1⃣');
-		await m.react('2⃣');
-		await m.react('3⃣');
-		await m.react('4⃣');
-
-		return m;
+		return message.channel.sendEmbed(embed, '', { disableEveryone: true })
+			.then(() => {
+				message.channel.awaitMessages(response => (response.content === (index + 1).toString() && response.author.id === message.author.id), {
+					max: 1,
+					time: 10000,
+					errors: ['time']
+				})
+				.then((collected) => {
+					message.channel.sendMessage(`Yes, *${terms[index].term}* is the correct term!`);
+				})
+				.catch(() => {
+					message.channel.sendMessage(`Time limit exceeded.  The correct term was *${terms[index].term}*.`);
+				});
+			});
 	}
 
 	public static pad(n: string): string
 	{
 		return (parseInt(n) < 10) ? ('0' + n) : n;
 	}
-};
+}

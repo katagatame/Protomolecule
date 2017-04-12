@@ -1,7 +1,7 @@
 'use strict';
 
 import { Client, Command, GuildStorage, RateLimit } from 'yamdbf';
-import { Message, MessageReaction, User } from 'discord.js';
+import { Message, } from 'discord.js';
 import Nerd from '../../util/nerd';
 import Term from '../../util/term';
 
@@ -80,54 +80,6 @@ export default class BelterWordSearch extends Command<Client>
 		index = terms.findIndex((t: Term) => { return t.term === term.term; });
 
 		// send the flashcard
-		let m: Message = await Nerd.flashcardMessage(message, terms, index);
-
-		// 10 second timer
-		setTimeout(() => {
-			m.clearReactions();
-			if (!userReaction)
-				return message.channel.sendMessage('Time expired, the correct term was *' + term.term + '*.');
-		}, 10e3);
-
-		// regex for correct response
-		const re: RegExp = new RegExp((index + 1).toString(), 'i');
-
-		// listen for reactions
-		this.client.on('messageReactionAdd', (reaction: MessageReaction, user: User) => {
-			// is the raction on our flashcard?
-			if (reaction.message.id === m.id)
-			{
-				// was it the command issuer?
-				if (user.id === message.author.id)
-				{
-					// did they answer correctly?
-					if (reaction.emoji.name.match(re))
-					{
-						userReaction = true;
-						m.clearReactions();
-						return message.channel.sendMessage('Yes, *' + term.term + '*  is correct!');
-					}
-
-					// no they didn't
-					else
-					{
-						userReaction = true;
-						m.clearReactions();
-						return message.channel.sendMessage('You are incorrect, the correct term was *' + term.term + '*.');
-					}
-				}
-
-				// no it wasn't
-				else
-				{
-					if (reaction.emoji.name.match(re))
-					{
-						userReaction = true;
-						m.clearReactions();
-						return message.channel.sendMessage(user.toString() + ' beat you to the punch! *' + term.term + '*  is correct!');
-					}
-				}
-			}
-		});
-	}
-};
+		Nerd.flashcardMessage(message, terms, index);
+    }
+}

@@ -115,4 +115,4 @@ export default class APoD extends Command<Client>
 				return message.channel.stopTyping();
 			});
 	}
-};
+}
