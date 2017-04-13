@@ -1,31 +1,42 @@
 'use strict';
-const Bot = require('yamdbf').Bot;
-const { DMManager } = require('yamdbf-addon-dm-manager');
-const config = require('./config.json');
-const path = require('path');
-const bot = new Bot({
-    name: config.name,
-    token: config.token,
-    config: config,
-    selfbot: false,
-    version: config.version,
-    statusText: config.status,
-    commandsDir: path.join(__dirname, 'commands'),
-    disableBase: [
-        'disablegroup',
-        'enablegroup',
-        'listgroups',
-        'limit',
-        'clearlimit',
-        'version',
-        'reload',
-        'eval',
-        'ping'
-    ]
+
+import { LogLevel } from 'yamdbf';
+
+const Client: any = require('yamdbf').Client;
+// const { DMManager } = require('yamdbf-addon-dm-manager');
+const config: any = require('./config.json');
+const path: any = require('path');
+const client: any = new Client({
+	name: config.name,
+	token: config.token,
+	config: config,
+	selfbot: false,
+	logLevel: LogLevel.INFO,
+	version: config.version,
+	statusText: config.status,
+	commandsDir: path.join(__dirname, 'commands'),
+	disableBase: [
+		'disablegroup',
+		'enablegroup',
+		'listgroups',
+		'limit',
+		'clearlimit',
+		'version',
+		'reload',
+		'eval',
+		'ping'
+	]
 })
-.setDefaultSetting('prefix', '.')
 .start();
 
-bot.on('ready', () => bot.user.setAvatar('./img/avatar.jpg'));
-bot.once('ready', () => { bot.dmManager = new DMManager(bot, '296753647277309972'); });
-bot.on('disconnect', () => process.exit());
+client.on('waiting', async () => {
+	await client.setDefaultSetting('prefix', '.');
+	client.emit('finished');
+});
+
+client.once('clientReady', () => {
+// 	client.user.setAvatar('./img/avatar.jpg');
+// 	client.dmManager = new DMManager(client, '296753647277309972');
+});
+
+client.on('disconnect', () => process.exit());
