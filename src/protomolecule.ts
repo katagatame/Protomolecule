@@ -3,7 +3,7 @@
 import { LogLevel } from 'yamdbf';
 
 const Client: any = require('yamdbf').Client;
-// const { DMManager } = require('yamdbf-addon-dm-manager');
+const { DMManager } = require('yamdbf-addon-dm-manager');
 const config: any = require('./config.json');
 const path: any = require('path');
 const client: any = new Client({
@@ -35,8 +35,7 @@ client.on('waiting', async () => {
 });
 
 client.once('clientReady', () => {
-// 	client.user.setAvatar('./img/avatar.jpg');
-// 	client.dmManager = new DMManager(client, '296753647277309972');
+	client.dmManager = new DMManager(client, 'xxx');
 });
 
 client.on('disconnect', () => process.exit());
