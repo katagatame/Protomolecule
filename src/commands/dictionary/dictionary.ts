@@ -21,8 +21,10 @@ export default class DisekowtelowdaDictionary extends Command<Client>
 	public async action(message: Message, args: string[]): Promise<any>
 	{
 		// variable declaration
-		const guildStorage: GuildStorage = this.client.storage.guilds.get(message.guild.id);
+		const guildStorage: GuildStorage = this.client.storage.guilds.get(Constants.guildID);
 		const terms: Array<Term> = await guildStorage.get('BeltaTerms');
+
+		message.channel.startTyping();
 
 		// evaluate the query
 		switch (args[0])
@@ -37,17 +39,27 @@ export default class DisekowtelowdaDictionary extends Command<Client>
 					.addField('Instructions', 'Press and hold `Alt`, then press a number combination to produce one of the characters above.\n\n*Windows platform*', false);
 
 				// display the embed
-				return message.channel.sendEmbed(cList, '', { disableEveryone: true });
+				message.channel.sendEmbed(cList, '', { disableEveryone: true });
+				return message.channel.stopTyping();
 
 			case 'sync':
 				// make sure user has the admin command role
 				if (!message.member.roles.find('name', 'The Rocinante'))
-					return message.channel.sendMessage('You do not permissions to run this command.');
+				{
+					message.channel.sendMessage('You do not permissions to run this command.');
+					return message.channel.stopTyping();
+				}
 
 				if (!Term.updateTerms(guildStorage))
-					return message.channel.sendMessage('Terms have been updated!');
+				{
+					message.channel.sendMessage('Terms have been updated!');
+					return message.channel.stopTyping();
+				}
 				else
-					return message.channel.sendMessage('Terms have not been updated!  Check error logs.');
+				{
+					message.channel.sendMessage('Terms have not been updated!  Check error logs.');
+					return message.channel.stopTyping();
+				}
 
 			case 'wl':
 				if (args[1] !== undefined)
@@ -63,14 +75,16 @@ export default class DisekowtelowdaDictionary extends Command<Client>
 					if (list.length <= 10)
 					{
 						wList.addField(args[1].charAt(0).toUpperCase() + ' Terms', list, true);
-						return message.channel.sendEmbed(wList, '', { disableEveryone: true });
+						message.channel.sendEmbed(wList, '', { disableEveryone: true });
+						return message.channel.stopTyping();
 					}
 
 					if (list.length > 10 && list.length <= 20)
 					{
 						wList.addField(args[1].charAt(0).toUpperCase() + ' Terms', list.splice(0, 10), true);
 						wList.addField('\u200b', list, true);
-						return message.channel.sendEmbed(wList, '', { disableEveryone: true });
+						message.channel.sendEmbed(wList, '', { disableEveryone: true });
+						return message.channel.stopTyping();
 					}
 
 					if (list.length > 20 && list.length <= 30)
@@ -78,16 +92,21 @@ export default class DisekowtelowdaDictionary extends Command<Client>
 						wList.addField(args[1].charAt(0).toUpperCase() + ' Terms', list.splice(0, 10), true);
 						wList.addField('\u200b', list.splice(0, 10), true);
 						wList.addField('\u200b', list, true);
-						return message.channel.sendEmbed(wList, '', { disableEveryone: true });
+						message.channel.sendEmbed(wList, '', { disableEveryone: true });
+						return message.channel.stopTyping();
 					}
 
 					break;
 				}
 				else
-					return message.channel.sendMessage('Please specify a letter to search on.');
+				{
+					message.channel.sendMessage('Please specify a letter to search on.');
+					return message.channel.stopTyping();
+				}
 
 			default:
-				return message.channel.sendMessage('Please specify a valid argument.');
+				message.channel.sendMessage('Please specify a valid argument.');
+				return message.channel.stopTyping();
 		}
 	}
 }

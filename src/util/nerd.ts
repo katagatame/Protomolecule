@@ -60,9 +60,11 @@ export default class Nerd
 				})
 				.then((collected) => {
 					message.channel.sendMessage(`Yes, *${terms[index].term}* is the correct term!`);
+					return message.channel.stopTyping();
 				})
 				.catch(() => {
 					message.channel.sendMessage(`Time limit exceeded.  The correct term was *${terms[index].term}*.`);
+					return message.channel.stopTyping();
 				});
 			});
 	}

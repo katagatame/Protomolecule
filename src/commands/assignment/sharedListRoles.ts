@@ -33,11 +33,16 @@ export default class ListRoles extends Command<Client>
 			.setTitle(message.guild.name + ': Role Synchronization')
 			.addField('Current Allowed Roles', '\nNo roles currently allowed.');
 
+		message.channel.startTyping();
+
 		if (adminCommandRole !== undefined && message.member.roles.find('name', adminCommandRole.name))
 		{
 			// make sure admin role isn't the lowest in the list
 			if (adminCommandRole.position === 1)
-				return message.channel.sendMessage('Please make sure your admin role isn\'t the lowest in the list.');
+			{
+				message.channel.sendMessage('Please make sure your admin role isn\'t the lowest in the list.');
+				return message.channel.stopTyping();
+			}
 
 			// iterate through server roles to build leftCol/rightCol
 			serverRoles.forEach((el: Role) => {
@@ -57,12 +62,16 @@ export default class ListRoles extends Command<Client>
 				.addField('Status', rightCol, true);
 
 			// display the list
-			return message.channel.sendEmbed(modEmbed, '', { disableEveryone: true });
+			message.channel.sendEmbed(modEmbed, '', { disableEveryone: true });
+			return message.channel.stopTyping();
 		}
 		else
 		{
 			if (availableRoles === [] || availableRoles === null)
-				return message.channel.sendEmbed(noRoles, '', { disableEveryone: true });
+			{
+				message.channel.sendEmbed(noRoles, '', { disableEveryone: true });
+				return message.channel.stopTyping();
+			}
 
 			// iterate through server roles to build leftCol
 			availableRoles.forEach((el: any) => leftCol += '\n' + el.name);
@@ -75,7 +84,8 @@ export default class ListRoles extends Command<Client>
 				.addField('Roles', leftCol, true);
 
 			// display the list
-			return message.channel.sendEmbed(userEmbed, '', { disableEveryone: true });
+			message.channel.sendEmbed(userEmbed, '', { disableEveryone: true });
+			return message.channel.stopTyping();
 		}
 	}
 }

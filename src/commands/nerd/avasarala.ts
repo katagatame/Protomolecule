@@ -22,6 +22,8 @@ export default class APoD extends Command<Client>
 		const quote: string = Constants.avasaralaQuotes[Math.floor(Math.random() * Constants.avasaralaQuotes.length)];
 		const image: string = Constants.avasaralaImages[Math.floor(Math.random() * Constants.avasaralaImages.length)];
 
+		message.channel.startTyping();
+
 		// build the quote
 		const embed: RichEmbed = new RichEmbed()
 			.setColor(0x206694)
@@ -31,6 +33,7 @@ export default class APoD extends Command<Client>
 			.setFooter('/u/it-reaches-out');
 
 		// send the quote
-		return message.channel.sendEmbed(embed, '', { disableEveryone: true });
+		message.channel.sendEmbed(embed, '', { disableEveryone: true });
+		return message.channel.stopTyping();
 	}
 }

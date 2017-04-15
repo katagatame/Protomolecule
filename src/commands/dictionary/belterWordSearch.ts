@@ -22,8 +22,10 @@ export default class BelterWordSearch extends Command<Client>
 	public async action(message: Message, args: string[]): Promise<any>
 	{
 		// variable declaration
-		const guildStorage: GuildStorage = this.client.storage.guilds.get(message.guild.id);
+		const guildStorage: GuildStorage = this.client.storage.guilds.get(Constants.guildID);
 		const belter: Array<Term> = await guildStorage.get('BeltaTerms');
+
+		message.channel.startTyping();
 
 		// error checking
 		if (belter === null)
@@ -34,7 +36,10 @@ export default class BelterWordSearch extends Command<Client>
 
 		// check if a term was specified
 		if (args.length === 0)
-			return message.channel.sendMessage('Please specify a term.');
+		{
+			message.channel.sendMessage('Please specify a term.');
+			return message.channel.stopTyping();
+		}
 
 		// serach for term
 		let options: any = { extract: (el: any) => { return el.term; } };
@@ -42,11 +47,17 @@ export default class BelterWordSearch extends Command<Client>
 
 		// check if term exists
 		if (results.length === 0)
-			return message.channel.sendMessage(`\`${args.join(' ')}\` is not a valid term.`);
+		{
+			message.channel.sendMessage(`\`${args.join(' ')}\` is not a valid term.`);
+			return message.channel.stopTyping();
+		}
 
 		// if single term found
 		if (results.length === 1)
-			return Term.sendTerm(message, results[0].original);
+		{
+			Term.sendTerm(message, results[0].original);
+			return message.channel.stopTyping();
+		}
 
 		// if multiple terms found
 		if (results.length >= 2)
@@ -59,7 +70,10 @@ export default class BelterWordSearch extends Command<Client>
 
 				// if single term found
 				if (termResults.length === 1)
-					return Term.sendTerm(message, termResults[0]);
+				{
+					Term.sendTerm(message, termResults[0]);
+					return message.channel.stopTyping();
+				}
 
 				// define parts of speech
 				const re: RegExp = new RegExp(Constants.partsOfSpeech.join('|'), 'ig');
@@ -97,11 +111,13 @@ export default class BelterWordSearch extends Command<Client>
 						}
 
 						// display definition
-						return Term.sendTerm(message, termResult);
+						Term.sendTerm(message, termResult);
+						return message.channel.stopTyping();
 					})
 					// user failed to input in the alotted time
 					.catch(() => {
-						return message.channel.sendMessage('There was no part of speech specified within the time limit.');
+						message.channel.sendMessage('There was no part of speech specified within the time limit.');
+						return message.channel.stopTyping();
 					});
 				});
 			}
@@ -120,7 +136,8 @@ export default class BelterWordSearch extends Command<Client>
 				}
 
 				// display error message
-				return message.channel.sendMessage(`More than one term found: \`${distinctTerms.join('\`, \`')}\`.  Please re-run the command and be more specific.`);
+				message.channel.sendMessage(`More than one term found: \`${distinctTerms.join('\`, \`')}\`.  Please re-run the command and be more specific.`);
+				return message.channel.stopTyping();
 			}
 		}
 	}

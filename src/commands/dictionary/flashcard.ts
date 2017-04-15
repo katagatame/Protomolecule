@@ -29,10 +29,13 @@ export default class BelterWordSearch extends Command<Client>
 		const guildStorage: GuildStorage = this.client.storage.guilds.get(message.guild.id);
 		const belter: Array<Term> = await guildStorage.get('BeltaTerms');
 		let pool: Array<number> = new Array(belter.length);
-		let term: Term = belter[Math.floor(Math.random() * belter.length)];
+		let random: number = Math.floor(Math.random() * belter.length);
+		let term: Term = belter[random];
 		let terms: Array<Term> = new Array();
 		let index: number = 0;
 		let userReaction: boolean = false;
+
+		message.channel.startTyping();
 
 		// if there is no definition, grab another
 		if (term.definition === '--')
@@ -43,6 +46,9 @@ export default class BelterWordSearch extends Command<Client>
 		{
 			pool[x] = (x + 1);
 		}
+
+		// remove the correct term from pool
+		pool.splice(random, 1);
 
 		// first random term
 		let a: number = Math.floor(Math.random() * pool.length);
@@ -81,5 +87,6 @@ export default class BelterWordSearch extends Command<Client>
 
 		// send the flashcard
 		Nerd.flashcardMessage(message, terms, index);
-    }
+		return message.channel.stopTyping();
+	}
 }
