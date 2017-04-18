@@ -3,7 +3,7 @@ import { Client, Command } from 'yamdbf';
 import { Message, RichEmbed } from 'discord.js';
 import Constants from '../../util/constants';
 
-export default class APoD extends Command<Client>
+export default class Avasarala extends Command<Client>
 {
 	public constructor(bot: Client)
 	{

@@ -5,7 +5,7 @@ import { Message, } from 'discord.js';
 import Nerd from '../../util/nerd';
 import Term from '../../util/term';
 
-export default class BelterWordSearch extends Command<Client>
+export default class Flashcard extends Command<Client>
 {
 	public constructor(bot: Client)
 	{

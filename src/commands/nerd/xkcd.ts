@@ -7,7 +7,7 @@ import Nerd from '../../util/nerd';
 import * as moment from 'moment';
 import * as request from 'request-promise';
 
-export default class APoD extends Command<Client>
+export default class XKCD extends Command<Client>
 {
 	public constructor(bot: Client)
 	{

@@ -4,7 +4,7 @@ import { Client, Command } from 'yamdbf';
 import { Collection, Guild, GuildMember, Message, RichEmbed, Role } from 'discord.js';
 import * as moment from 'moment';
 
-export default class UserStats extends Command<Client>
+export default class ServerStats extends Command<Client>
 {
 	public constructor(bot: Client)
 	{
