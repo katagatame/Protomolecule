@@ -95,6 +95,7 @@ export default class AllowRole extends Command<Client>
 			}
 		}
 
+
 		// if more than one role specified
 		if (roleArgs.length > 1)
 		{
