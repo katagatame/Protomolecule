@@ -1,0 +1,36 @@
+{
+	"source": {
+		"includePattern": ".+\\.js?$",
+		"excludePattern": "(^|\\/|\\\\)_"
+	},
+	"tags": {
+		"allowUnknownTags": true,
+		"dictionaries": ["jsdoc"]
+	},
+	"plugins": ["plugins/markdown"],
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true
+	},
+	"opts": {
+		"template": "node_modules/tui-jsdoc-template/",
+		"encoding": "utf8",
+		"destination": "./docs/",
+		"recurse": true,
+		"verbose": true
+	},
+	"templates": {
+		"cleverLinks": true,
+		"monospaceLinks": false,
+		"footerText": "Aeden...",
+		"logo": {
+			"url": "https://i.imgur.com/jBBeteA.png",
+			"width": "50px",
+			"height": "50px"
+		},
+		"tabNames": {
+			"api": "API",
+			"tutorials": "Examples"
+		}
+	}
+}

@@ -1,36 +1,53 @@
-const gulp = require('gulp');
-const gulp_ts = require('gulp-typescript');
-const gulp_tslint = require('gulp-tslint');
-const tslint = require('tslint');
 const del = require('del');
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+const jsdoc = require('gulp-jsdoc3');
+const sourcemaps = require('gulp-sourcemaps');
+const typescript = require('gulp-typescript');
 
-const project = gulp_ts.createProject('tsconfig.json');
-const linter = tslint.Linter.createProgram('tsconfig.json');
-
-gulp.task('tslint', () => {
-    gulp.src(['./src/**/*.ts'])
-      .pipe(gulp_tslint({
-			configuration: 'tslint.json',
-			formatter: 'prose',
-			program: linter
-		}))
-		.pipe(gulp_tslint.report());
+/** Create gulp task `delete` */
+gulp.task('delete', done => {
+	del.sync(['./bin/']);
+	done();
 });
 
-gulp.task('default', () =>
-{
-    del.sync(['./bin/**/*.*']);
-
-    gulp.src('./src/config.json')
-        .pipe(gulp.dest('bin/'));
-    
-    gulp.src('./src/client_secret.json')
-        .pipe(gulp.dest('bin/'));
-
-    gulp.src('./src/**/*.ts')
-        .pipe(project())
-        .pipe(gulp.dest('bin/'));
-
-    gulp.src('./src/img/*.*')
-        .pipe(gulp.dest('bin/img/'));
+/** Create gulp task `lint` */
+gulp.task('lint', () => {
+	return gulp
+		.src(['./src/**/*.ts', './src/**/*.ts'])
+		.pipe(eslint())
+		.pipe(eslint.format())
+		.pipe(eslint.failAfterError());
 });
+
+/** Create gulp task 'build:client' */
+gulp.task('build:client', () => {
+	const clientProject = typescript.createProject('./tsconfig.json');
+
+	const client = gulp
+		.src(['./src/**/*.ts'])
+		.pipe(sourcemaps.init({ base: './src' }))
+		.pipe(clientProject());
+
+	gulp
+		.src('./src/client/user/config/*.json')
+		.pipe(gulp.dest('./bin/client/user/config/'));
+
+	gulp.src('./src/data/*.json').pipe(gulp.dest('./bin/data/'));
+
+	return client.js
+		.pipe(sourcemaps.write('.', { sourceRoot: './src' }))
+		.pipe(gulp.dest('./bin/'));
+});
+
+/** Create gulp task 'build:docs' */
+gulp.task('build:docs', () => {
+	del.sync(['./docs/**/*.*'], { force: true });
+
+	const jsDocConfig = require('./.jsdoc.json');
+
+	return gulp.src(['README.md', './bin/**/*.js']).pipe(jsdoc(jsDocConfig));
+});
+
+/** Create gulp task `default`. */
+gulp.task('default', gulp.series('lint', 'delete', 'build:client'));

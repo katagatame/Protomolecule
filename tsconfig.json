@@ -1,18 +1,23 @@
 {
-    "compilerOptions": {
-        "noImplicitAny": true,
-        "module": "commonjs",
-        "target": "es6",
-        "lib": [
-            "es7",
-            "dom"
-        ],
-        "declaration": true,
-        "sourceMap": true,
-        "removeComments": false
-    },
-	"exclude": [
-		"bin",
-        "node_modules"
-	]
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es2018",
+		"lib": ["es2018"],
+		"declaration": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"pretty": true,
+		"removeComments": false,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true
+	},
+	"exclude": ["bin", "node_modules"]
 }

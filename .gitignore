@@ -1,8 +1,6 @@
-.vscode
-/node_modules/*
-/bin/*
-config.json
-config.dev.json
-config.prod.json
-client_secret.json
-npm-debug*
+bin/*
+coverage/*
+node_modules/*
+
+/src/client/user/config/user-config-dev.json
+/src/client/user/config/user-config-prod.json

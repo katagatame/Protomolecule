@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "7.5.0"
+  - 'lts/*'
 
 sudo: false
 
@@ -16,3 +16,8 @@ before_install:
   - npm explore npm -g -- npm install node-gyp@latest
 
 install: npm install
+
+before_script:
+  - npm install -g gulp-cli
+
+script: gulp default
